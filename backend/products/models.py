@@ -83,6 +83,3 @@ class Review(models.Model):
      
      def get_absolute_url(self):
           return Product.objects.get(pk=self.product.pk).get_absolute_url()
-
-
-#class Characteristic
