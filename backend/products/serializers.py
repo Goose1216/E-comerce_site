@@ -8,9 +8,18 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializerList(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True, many=True)
     
     class Meta:
-        fields = ('name', 'slug', 'price', 'brand', 'category',)
+        fields = ('name', 'slug', 'price', 'brand', 'category', 'image')
+        model = Product
+
+
+class ProductSerializerDetail(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True, many=True)
+
+    class Meta:
+        fields = ('name', 'slug', 'price', 'brand', 'category', 'image', 'height', "width", 'depth')
+        lookup_field = 'slug'
         model = Product

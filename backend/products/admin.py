@@ -8,17 +8,13 @@ class ReviewAdmin(admin.ModelAdmin):
 class ReviewInline(admin.TabularInline):
     model = Review
 
-class CategoryInline(admin.TabularInline):
-    model = Product.category.through
 
     
 class ProductAdmin(admin.ModelAdmin):
     inlines = [
         ReviewInline,
-        CategoryInline,
     ]
-    exlucde = ("products",)
-    list_filter = ["brand", "price",]
+    list_filter = ["brand",]
     list_display = ["name", "price", "brand",]
     
 
