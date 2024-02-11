@@ -2,15 +2,17 @@ import headStyles from '../styles/MainWindow/headStyle.module.css';
 import BasketImg from '../img/icon-basket.png';
 import AdminImg from '../img/icon-admin.png';
 import BoxImg from '../img/icon-box.png';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Header = () => {
   const [position, setPosition] = useState(0);
+  const carouselRef = useRef(null);
+  const itemRef = useRef(null);
   const carouselItems = ['1', '2', '3'];
 
   const scrollCarousel = (direction) => {
-    const itemWidth = document.querySelector(`.${headStyles.item}`).offsetWidth;
-    const containerWidth = document.querySelector(`.${headStyles.carousel}`).offsetWidth;
+    const itemWidth = itemRef.current.offsetWidth;
+    const containerWidth = carouselRef.current.offsetWidth;
     const scrollAmount = containerWidth;
 
     let newPosition;
@@ -58,10 +60,10 @@ const Header = () => {
           <a href="#" className={headStyles.searchButton}>Поиск</a>
         </div>
         <div className={headStyles.carouselContainer}>
-          <span className={headStyles.carousel} style={{ transform: `translateX(${position}px)` }}>
-              <div className={headStyles.item}></div>
-              <div className={headStyles.item}></div>
-              <div className={headStyles.item}></div>
+          <span ref={carouselRef} className={headStyles.carousel} style={{ transform: `translateX(${position}px)` }}>
+              <div ref={itemRef} className={headStyles.item}></div>
+              <div ref={itemRef} className={headStyles.item}></div>
+              <div ref={itemRef} className={headStyles.item}></div>
           </span>
           <span className={headStyles.TapeButtons}>
             <button className={headStyles.arrow} onClick={() => scrollCarousel('left')}>&#60;</button>
