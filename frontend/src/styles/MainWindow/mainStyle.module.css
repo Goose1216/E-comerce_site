@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.NewContainerBlocks {
+    display: flex;
+    position: relative;
+    left: 4%;
+    width: 95%;
+    height: 600px;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.Stock {
+    display: inline-block;
+    position: relative;
+    cursor: default;
+    margin: 20px auto;
+    margin-left: 150px;
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    text-shadow: 1px 1px 5px rgb(0, 44, 24);
+}
+
+.NewProduct {
+    display: inline-block;
+    position: relative;
+    cursor: default;
+    margin: 20px auto;
+    margin-left: 150px;
+    color: #f78820;
+    font-size: 35px;
+    text-shadow: 1px 0 1px #000, 
+    0 1px 1px #000, 
+    -1px 0 1px #000, 
+    0 -1px 1px #000;
+}
+
+.MainContainer {
+    position: absolute;
+    top: 75%;
+}
+
+.BestContainerBlocks {
+    display: flex;
+    position: relative;
+    left: 4%;
+    width: 95%;
+    height: 600px;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

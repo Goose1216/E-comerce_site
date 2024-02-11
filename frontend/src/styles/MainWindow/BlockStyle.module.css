@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Block {
+    display: grid;
+    position: relative;
+    border: 1px solid;
+    border-radius: 15px;
+    padding: 10px;
+    margin: auto 10px;
+}
+
+.IMG {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.IMG:hover {
+    transform: scale(1.04);
+}
