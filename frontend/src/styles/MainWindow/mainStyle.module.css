@@ -11,6 +11,57 @@
     background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
 }
 
+.carouselContainer {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.carousel {
+    display: flex;
+    white-space: nowrap;
+    transition: transform 0.5s ease-in-out;
+}
+
+.TapeButtons {
+    display: flex;
+    position: absolute;
+    top: 35%;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.arrow {
+    cursor: pointer;
+    margin: 0 20px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+    background-color: #1a7e51;
+}
+
+.item {
+    display: flex;
+    position: relative;
+    flex: 0 0 100%;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    border-radius: 30px;
+    max-width: 100%;
+    padding: 10px;
+    background: radial-gradient(circle, rgb(255, 255, 255) 40%, rgba(31, 116, 77, 0) 90%);
+    box-sizing: border-box;
+}
+
 .NewContainerBlocks {
     display: flex;
     position: relative;
@@ -51,7 +102,7 @@
     display: flex;
     position: relative;
     width: 95%;
-    height: 600px;
+    height: 100px;
     margin: 20px auto;
     justify-content: center;
     align-items: center;
