@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 import Main from './components/body/Main';
-import appStyles from './styles/appStyles.module.css'
+import Footer from './components/Footer';
+import Login from './Login';
+import appStyles from './styles/appStyles.module.css';
 
 class App extends Component {
     render() {
         return (
-            <div className={appStyles}>
-                <Header />
-                <Main />
-                <Footer />
-            </div>
+            <Router>
+                <div className={appStyles}>
+                    <Routes>
+                        <Route path="/" element={<Layout />} />
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </div>
+            </Router>
         );
     }
+}
+
+function Layout() {
+    return (
+        <>
+            <Header />
+            <Main />
+            <Footer />
+        </>
+    );
 }
 
 export default App;

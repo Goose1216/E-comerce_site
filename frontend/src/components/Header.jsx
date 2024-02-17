@@ -3,72 +3,75 @@ import BasketImg from '../img/icon-basket.png';
 import AdminImg from '../img/icon-admin.png';
 import BoxImg from '../img/icon-box.png';
 import React, { useState, useEffect, useRef } from 'react';
+import { throttle } from 'lodash';
 
 const Header = () => {
-  const [position, setPosition] = useState(0);
-  const carouselRef = useRef(null);
-  const itemRef = useRef(null);
-  const carouselItems = ['1', '2', '3'];
+  const [prevScrollY, setPrevScrollY] = useState(0);
+  const navbarRef = useRef(null);
+  const searchBoxRef = useRef(null);
+  const headHalfRef = useRef(null);
 
-  const scrollCarousel = (direction) => {
-    const itemWidth = itemRef.current.offsetWidth;
-    const containerWidth = carouselRef.current.offsetWidth;
-    const scrollAmount = containerWidth;
+  useEffect(() => {
+    const handleScroll = throttle(() => {
+      const distanceY = window.scrollY;
+      const scrollThreshold = 150;
+      const scrollChange = distanceY - prevScrollY;
+    
+      if (navbarRef.current && searchBoxRef.current) {
+        if (distanceY > scrollThreshold) {
+          headHalfRef.current.classList.add(headStyles.stickyHeader);
+          navbarRef.current.classList.add(headStyles.stickyHeader);
+          searchBoxRef.current.classList.add(headStyles.stickyHeader);
+          headHalfRef.current.style.height = `${70 - scrollChange / 5}px`;
+        } else {
+          headHalfRef.current.classList.remove(headStyles.stickyHeader);
+          navbarRef.current.classList.remove(headStyles.stickyHeader);
+          searchBoxRef.current.classList.remove(headStyles.stickyHeader);
+          headHalfRef.current.style.height = '100px';
+        }
+        setPrevScrollY(distanceY);
+      }
+    }, 200);
+    
 
-    let newPosition;
+    window.addEventListener('scroll', handleScroll);
 
-    if (direction === 'left') {
-      newPosition = position + scrollAmount;
-    } else {
-      newPosition = position - scrollAmount;
-    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollY]);
 
-    if (newPosition > 0) {
-      newPosition = -(itemWidth * (carouselItems.length - 1));
-    } else if (newPosition < -(itemWidth * (carouselItems.length - 1))) {
-      newPosition = 0;
-    }
-
-    setPosition(newPosition);
+  const handleLogin = () => {
+    window.open('/login', '_self');
   };
 
-  
   return (
     <header>
-        <div className={headStyles.navbar}>
-          <nav className={headStyles.compon}>
-            <a href="/" className={headStyles.logo}>
-              <p className={headStyles.animation}>Store</p>
-            </a>
-            <span className={headStyles.geo}>Москва</span>
-          </nav>
-          <nav className={headStyles.other}>
-            <span className={headStyles.otherPoint}>Контакты</span>
-            <span className={headStyles.otherPoint}>О Нас</span>
-            <span className={headStyles.otherPoint}>Юридическое соглашение</span>
-          </nav>
-          <nav className={headStyles.compon}>
-            <a href="#" className={headStyles.menuItem}><img src={BasketImg}/>Корзина</a>
-            <div className={headStyles.verticalLine}></div>
-            <a href="#" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
-            <div className={headStyles.verticalLine}></div>
-            <a href="#" className={headStyles.menuItem}><img src={AdminImg}/>Войти</a>
-          </nav>
-        </div>
-        <div className={headStyles.searchBox}>
-          <input className={headStyles.searchInput} type="text" placeholder='Найти товар'/>
-          <a href="#" className={headStyles.searchButton}>Поиск</a>
-        </div>
-        <div className={headStyles.carouselContainer}>
-          <span ref={carouselRef} className={headStyles.carousel} style={{ transform: `translateX(${position}px)` }}>
-              <div ref={itemRef} className={headStyles.item}></div>
-              <div ref={itemRef} className={headStyles.item}></div>
-              <div ref={itemRef} className={headStyles.item}></div>
-          </span>
-          <span className={headStyles.TapeButtons}>
-            <button className={headStyles.arrow} onClick={() => scrollCarousel('left')}>&#60;</button>
-            <button className={headStyles.arrow} onClick={() => scrollCarousel('right')}>&#62;</button>
-          </span>
+        <div ref={headHalfRef} className={headStyles.headHalf}>
+          <div ref={navbarRef} className={headStyles.navbar}>
+            <nav className={headStyles.componLeft}>
+              <a href="/" className={headStyles.logo}>
+                <p className={headStyles.animation}>Store</p>
+              </a>
+              <span className={headStyles.geo}>Москва</span>
+            </nav>
+            <nav className={headStyles.other}>
+              <span className={headStyles.otherPoint}>Контакты</span>
+              <span className={headStyles.otherPoint}>О Нас</span>
+              <span className={headStyles.otherPoint}>Юридическое соглашение</span>
+            </nav>
+            <nav className={headStyles.componRight}>
+              <a href="#" className={headStyles.menuItem}><img src={BasketImg}/>Корзина</a>
+              <div className={headStyles.verticalLine}></div>
+              <a href="#" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
+              <div className={headStyles.verticalLine}></div>
+              <a onClick={handleLogin} className={headStyles.menuItem}><img src={AdminImg} alt="admin"/>Войти</a>
+            </nav>
+          </div>
+          <div ref={searchBoxRef} className={headStyles.searchBox}>
+            <input className={headStyles.searchInput} type="text" placeholder='Найти товар'/>
+            <a href="#" className={headStyles.searchButton}>Поиск</a>
+          </div>
         </div>
     </header>
   );

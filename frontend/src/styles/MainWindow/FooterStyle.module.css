@@ -5,9 +5,9 @@
 }
 
 .FooterBlock {
-    display: inline-block;
     position: relative;
-    border: 1px solid black;
-    height: 200px;
+    height: 400px;
     width: 100%;
+    background: linear-gradient(0deg, #000000,#8a8a8a,#ffffff);
 }
+

@@ -14,8 +14,9 @@ body {
 
 header {
     background: linear-gradient(#1a7e51, #4aaf80, #72c79f);
-    height: 500px;
+    height: 300px;
     position: static;
+    transition: all 0.3s ease;
 }
 
 .navbar {
@@ -26,7 +27,14 @@ header {
     height: 100px;
 }
 
-.compon {
+.componLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.componRight {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,6 +49,7 @@ header {
     color: #fff;
     text-decoration: none;
     margin-left: 50px;
+    transition: 0.2s;
 }
 
 .logo:hover {
@@ -102,6 +111,7 @@ img {
 .geo {
     display: flex;
     text-decoration: none;
+    position: stickys;
     color: white;
     font-weight: normal;
     transition: 0.3s;
@@ -121,6 +131,7 @@ img {
     left: 27%;
     margin: 30px auto 50px auto;
     height: 42px;
+    transition: 0.2s;
 }
 
 .searchInput {
@@ -146,6 +157,7 @@ img {
     border-radius: 4px;
     padding: 7px;
     text-decoration: none;
+    text-align: center;
 }
 
 .searchButton:hover {
@@ -153,53 +165,58 @@ img {
     border-color: #f78820;
 }
 
-.carouselContainer {
+.headHalf {
+    transition: height 0.2s ease;
+}
+
+.headHalf.stickyHeader {
+    display: flex;
+    position: fixed;
+    top: 0;
     width: 100%;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-}
-
-.carousel {
-    display: flex;
-    white-space: nowrap;
-    transition: transform 0.5s ease-in-out;
-}
-
-.TapeButtons {
-    display: flex;
-    position: absolute;
-    top: 35%;
-    left: 0;
-    right: 0;
-    justify-content: space-between;
-    z-index: 2;
-}
-
-.arrow {
-    cursor: pointer;
-    margin: 0 20px;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 10px;
-    font-size: 40px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    z-index: 3;
+    height: 70px;
     background-color: #1a7e51;
+    z-index: 1000;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
 }
 
-.item {
-    display: flex;
-    position: relative;
-    flex: 0 0 100%;
-    align-items: center;
-    justify-content: center;
-    height: 250px;
-    border-radius: 30px;
-    max-width: 100%;
-    padding: 10px;
-    background: radial-gradient(circle, rgb(255, 255, 255) 40%, rgba(31, 116, 77, 0) 90%);
-    box-sizing: border-box;
+.stickyHeader .logo p {
+    font-size: 30px;
+}
+
+.stickyHeader .other {
+    display: none;
+}
+
+.stickyHeader .searchBox {
+    position: absolute;
+    left: 30%;
+    top: -11px;
+}
+
+.stickyHeader .searchInput {
+    width: 400px;
+    height: 30px;
+}
+
+.stickyHeader .searchButton {
+    height: 30px;
+    font-size: 14px;
+    padding-top: 3px;
+}
+
+.stickyHeader .menuItem img {
+    width: 16px;
+    height: 16px;
+}
+
+.stickyHeader .menuItem {
+    font-size: 15px;
+}
+
+.stickyHeader .componRight{
+    position: absolute;
+    left: 70%;
 }
