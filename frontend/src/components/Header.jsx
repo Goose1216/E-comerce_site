@@ -2,6 +2,8 @@ import headStyles from '../styles/MainWindow/headStyle.module.css';
 import BasketImg from '../img/icon-basket.png';
 import AdminImg from '../img/icon-admin.png';
 import BoxImg from '../img/icon-box.png';
+import BackPict from '../img/BackPict.png'
+import BackPictRight from '../img/BackPictRight.png'
 import React, { useState, useEffect, useRef } from 'react';
 import { throttle } from 'lodash';
 
@@ -47,6 +49,8 @@ const Header = () => {
 
   return (
     <header>
+        <div className={headStyles.BackPict}><img src={BackPict}/></div>
+        <div className={headStyles.BackPictRight}><img src={BackPictRight}/></div>
         <div ref={headHalfRef} className={headStyles.headHalf}>
           <div ref={navbarRef} className={headStyles.navbar}>
             <nav className={headStyles.componLeft}>

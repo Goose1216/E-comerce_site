@@ -7,6 +7,16 @@ import Login from './Login';
 import appStyles from './styles/appStyles.module.css';
 
 class App extends Component {
+    componentDidMount() {
+        this.scrollWindowToTop();
+    }
+
+    scrollWindowToTop = () => {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 2);
+    };
+
     render() {
         return (
             <Router>

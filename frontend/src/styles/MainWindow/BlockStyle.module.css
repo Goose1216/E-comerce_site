@@ -1,25 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.BlockContainer {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .Block {
-    display: grid;
     position: relative;
-    border: 1px solid;
+    border: 1px solid transparent;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
+    height: auto;
+    width: 210px;
     padding: 10px;
     margin: auto 10px;
+    display: flex;
+    align-items: flex-start;
 }
 
-.IMG {
-    width: 200px;
-    height: 200px;
+.BlockContainer img {
+    display: inline-block;
+    width: 70px;
+    height: auto;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.IMG:hover {
-    transform: scale(1.04);
+.ProductName {
+    display: flex;
+    font-size: 17px;
+    margin: 0 10px;
+    flex-wrap: wrap;
+    white-space: normal;
+    cursor: pointer;
+}
+
+.ProductPrice {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: #ff8c00;
+    text-shadow: 1px 0 1px #000, 
+    0 1px 1px #000, 
+    -1px 0 1px #000, 
+    0 -1px 1px #000;
 }

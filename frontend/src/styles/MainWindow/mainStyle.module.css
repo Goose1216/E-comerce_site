@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 .MainContainer {
@@ -20,8 +21,10 @@
 
 .carousel {
     display: flex;
+    position: relative;
     white-space: nowrap;
     transition: transform 0.5s ease-in-out;
+    z-index: 2;
 }
 
 .TapeButtons {
@@ -30,8 +33,17 @@
     top: 35%;
     left: 0;
     right: 0;
-    justify-content: space-between;
-    z-index: 2;
+    z-index: 3;
+}
+
+.TapeButtons button:first-child {
+    position: absolute;
+    left: 0;
+}
+
+.TapeButtons button:last-child {
+    position: absolute;
+    right: 0;
 }
 
 .arrow {
@@ -59,18 +71,6 @@
     max-width: 100%;
     padding: 10px;
     background: radial-gradient(circle, rgb(255, 255, 255) 40%, rgba(31, 116, 77, 0) 90%);
-    box-sizing: border-box;
-}
-
-.NewContainerBlocks {
-    display: flex;
-    position: relative;
-    width: 95%;
-    height: 600px;
-    margin: 20px auto;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .Stock {
@@ -84,7 +84,7 @@
     text-shadow: 1px 1px 5px rgb(0, 44, 24);
 }
 
-.NewProduct {
+.BestProduct {
     display: inline-block;
     position: relative;
     cursor: default;
@@ -102,7 +102,7 @@
     display: flex;
     position: relative;
     width: 95%;
-    height: 100px;
+    height: auto;
     margin: 20px auto;
     justify-content: center;
     align-items: center;
