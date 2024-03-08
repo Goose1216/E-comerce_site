@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Reg from './components/Reg/Reg';
+import LoginWindow from './components/Reg/Login'
 
 class Login extends Component {
     render() {
         return (
             <div>
-                <Reg />
+                <LoginWindow />
             </div>
         );
     }
