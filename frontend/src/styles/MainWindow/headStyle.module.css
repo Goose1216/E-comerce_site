@@ -119,6 +119,18 @@ header {
     border-right: none;
 }
 
+.Admin {
+    position: absolute;
+    right: 50px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: height 0.3s ease;
+    background-color: transparent;
+    z-index: 3;
+    top: 70px;
+}
+
 .verticalLine {
     height: 20px;
     width: 1px;

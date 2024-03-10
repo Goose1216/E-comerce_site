@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/body/Main';
@@ -8,6 +8,8 @@ import MainIcon from './img/iconMain.png';
 import appStyles from './styles/appStyles.module.css';
 
 class App extends Component {
+
+
     componentDidMount() {
         this.scrollWindowToTop();
     }
@@ -19,15 +21,16 @@ class App extends Component {
     };
 
     render() {
+
         return (
             <Router>
                 <link rel="icon" type="image/png" href={MainIcon} />
-                <div className={appStyles}>
-                    <Routes>
-                        <Route path="/" element={<Layout />} />
-                        <Route path="/login" element={<Login />} />
-                    </Routes>
-                </div>
+                    <div className={appStyles}>
+                        <Routes>
+                            <Route path="/" element={<Layout />} />
+                            <Route path="/login" element={<Login />} />
+                        </Routes>
+                    </div>
             </Router>
         );
     }

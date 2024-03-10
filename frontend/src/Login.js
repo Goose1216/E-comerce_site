@@ -4,9 +4,7 @@ import LoginWindow from './components/Reg/Login'
 class Login extends Component {
     render() {
         return (
-            <div>
-                <LoginWindow />
-            </div>
+            <LoginWindow />
         );
     }
 }

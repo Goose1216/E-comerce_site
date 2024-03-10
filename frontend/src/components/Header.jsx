@@ -7,12 +7,30 @@ import BackPictRight from '../img/BackPictRight.png';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { throttle } from 'lodash';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Header = () => {
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsMenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMenuOpen(false);
+  };
+
+
   const [prevScrollY, setPrevScrollY] = useState(0);
   const navbarRef = useRef(null);
   const searchBoxRef = useRef(null);
   const headHalfRef = useRef(null);
+
+  const loggedIn = localStorage.getItem('token') !== null;
+
+  console.log(loggedIn)
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -44,8 +62,27 @@ const Header = () => {
     };
   }, [prevScrollY]);
 
-  const handleLogin = () => {
-    window.open('/login', '_self');
+
+  const [error, setError] = useState('');
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/');
+
+      console.log(response)
+
+      if (response.status != 200) return
+
+      localStorage.removeItem('token');
+
+      window.location.reload();
+
+    } catch (error) {
+      setError('Не удалось выйти с аккаунта.');
+      console.error('Ошибка:', error);
+    }
   };
 
   return (
@@ -70,8 +107,31 @@ const Header = () => {
               <div className={headStyles.verticalLine}></div>
               <a href="#" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
               <div className={headStyles.verticalLine}></div>
-              <a onClick={handleLogin} className={headStyles.menuItem}><img src={AdminImg} alt="admin"/>Войти</a>
+              {loggedIn ? (
+                  <a href="#"
+                    className={headStyles.menuItem}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <img src={AdminImg} alt="admin" />
+                    Админ
+                  </a>
+                ) : (
+                  <Link to="/login" className={headStyles.menuItem}><img src={AdminImg} alt="admin" />Войти</Link>
+                )}
             </nav>
+              {isMenuOpen && (
+                <div className={headStyles.Admin} onMouseEnter={handleMouseEnter}>
+                  <Link to="/account">
+                    <a href="#" className={headStyles.menuItem}>
+                      Личный кабинет
+                    </a>
+                  </Link>
+                  <a href="#" className={headStyles.menuItem} onClick={handleLogout}>
+                    Выйти
+                  </a>
+                </div>
+              )}
           </div>
           <div ref={searchBoxRef} className={headStyles.searchBox}>
             <input className={headStyles.searchInput} type="text" placeholder='Найти товар'/>
