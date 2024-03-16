@@ -6,20 +6,17 @@ import BackPict from '../img/BackPict.png';
 import BackPictRight from '../img/BackPictRight.png';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { throttle } from 'lodash';
+import { debounce } from 'lodash';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const handleMouseEnter = () => {
     setIsMenuOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsMenuOpen(false);
   };
 
 
@@ -28,31 +25,32 @@ const Header = () => {
   const searchBoxRef = useRef(null);
   const headHalfRef = useRef(null);
 
-  const loggedIn = localStorage.getItem('token') !== null;
+  const loggedIn = document.cookie.split(';').some(cookie => cookie.trim().startsWith('token='));
 
   console.log(loggedIn)
 
   useEffect(() => {
-    const handleScroll = throttle(() => {
+    const handleScroll = debounce(() => {
       const distanceY = window.scrollY;
       const scrollThreshold = 150;
-      const scrollChange = distanceY - prevScrollY;
-    
-      if (navbarRef.current && searchBoxRef.current) {
+
+      if (navbarRef.current && searchBoxRef.current && headHalfRef.current) {
         if (distanceY > scrollThreshold) {
           headHalfRef.current.classList.add(headStyles.stickyHeader);
           navbarRef.current.classList.add(headStyles.stickyHeader);
           searchBoxRef.current.classList.add(headStyles.stickyHeader);
-          headHalfRef.current.style.height = `${70 - scrollChange / 5}px`;
+          menuRef.current.classList.add(headStyles.stickyHeader);
+          headHalfRef.current.style.height = '70px';
         } else {
           headHalfRef.current.classList.remove(headStyles.stickyHeader);
           navbarRef.current.classList.remove(headStyles.stickyHeader);
           searchBoxRef.current.classList.remove(headStyles.stickyHeader);
+          menuRef.current.classList.remove(headStyles.stickyHeader);
           headHalfRef.current.style.height = '100px';
         }
         setPrevScrollY(distanceY);
       }
-    }, 200);
+    }, 0);
     
 
     window.addEventListener('scroll', handleScroll);
@@ -70,20 +68,41 @@ const Header = () => {
     
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/');
-
+  
       console.log(response)
-
-      if (response.status != 200) return
-
-      localStorage.removeItem('token');
+  
+      if (response.status !== 200) return;
+  
+      removeToken();
 
       window.location.reload();
-
+  
     } catch (error) {
       setError('Не удалось выйти с аккаунта.');
       console.error('Ошибка:', error);
     }
   };
+  
+  const removeToken = () => {
+    const expiryDate = new Date(0).toUTCString();
+    document.cookie = 'token=;expires=' + expiryDate + ';path=/';
+  
+    console.log('Token removed');
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header>
@@ -108,28 +127,28 @@ const Header = () => {
               <a href="#" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
               <div className={headStyles.verticalLine}></div>
               {loggedIn ? (
-                  <a href="#"
+                  <span
                     className={headStyles.menuItem}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+                    onClick={handleMouseEnter}
+                    ref={menuRef}
                   >
                     <img src={AdminImg} alt="admin" />
                     Админ
-                  </a>
+                  </span>
                 ) : (
                   <Link to="/login" className={headStyles.menuItem}><img src={AdminImg} alt="admin" />Войти</Link>
                 )}
             </nav>
               {isMenuOpen && (
-                <div className={headStyles.Admin} onMouseEnter={handleMouseEnter}>
+                <div className={headStyles.Admin}>
                   <Link to="/account">
-                    <a href="#" className={headStyles.menuItem}>
+                    <a href="#" className={headStyles.AuthItem}>
                       Личный кабинет
                     </a>
                   </Link>
-                  <a href="#" className={headStyles.menuItem} onClick={handleLogout}>
+                  <button className={headStyles.AuthExit} onClick={handleLogout}>
                     Выйти
-                  </a>
+                  </button>
                 </div>
               )}
           </div>
