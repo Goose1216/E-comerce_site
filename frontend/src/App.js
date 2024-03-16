@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Main from './components/body/Main';
 import Footer from './components/Footer';
 import Login from './Login';
+import Reg from './Reg';
 import MainIcon from './img/iconMain.png';
 import appStyles from './styles/appStyles.module.css';
 
@@ -25,14 +26,16 @@ class App extends Component {
         return (
             <Router>
                 <link rel="icon" type="image/png" href={MainIcon} />
-                    <div className={appStyles}>
-                        <Routes>
-                            <Route path="/" element={<Layout />} />
-                            <Route path="/login" element={<Login />} />
-                        </Routes>
-                    </div>
+                <div className={appStyles}>
+                    <Routes>
+                        <Route path="/" element={<Layout />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/reg" element={<Reg />} />
+                    </Routes>
+                </div>
             </Router>
         );
+        
     }
 }
 

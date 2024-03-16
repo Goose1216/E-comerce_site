@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import regStyles from '../../styles/RegWindow/RegStyles.module.css';
+import regStyles from '../../styles/RegWindow/LoginStyles.module.css';
 import axios from 'axios';
 import { setToken } from '../../authStorage';
+
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [emailOrName, setEmailOrName] = useState('');
@@ -12,7 +14,7 @@ const Login = () => {
 
     const login = async (e) => {
         e.preventDefault();
-    
+
         try {
           const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', {
             username: emailOrName,
@@ -68,11 +70,11 @@ const Login = () => {
                     </button>
                 </form>
                 <button className={regStyles.RememButton}>Забыли пароль?</button>
-                <a href="#" className={regStyles.RegLink}>Еще не зарегистрированы?</a>
+                <Link to="/reg" className={regStyles.RegLink}>Еще не зарегистрированы?</Link>
             </div>
         </div>
     </div>
-    );
+    );  
 };
 
 export default Login;

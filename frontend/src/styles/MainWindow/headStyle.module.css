@@ -111,24 +111,12 @@ header {
 
 .menuItem:hover {
     cursor: pointer;
-    transform: scale(1.2);
-    margin: auto 10px;
+    transform: scale(1.1);
+    margin: auto 5px;
 }
 
 .menuItem:last-child {
     border-right: none;
-}
-
-.Admin {
-    position: absolute;
-    right: 50px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: height 0.3s ease;
-    background-color: transparent;
-    z-index: 3;
-    top: 70px;
 }
 
 .verticalLine {
@@ -253,15 +241,57 @@ img {
 }
 
 .stickyHeader .menuItem img {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
 }
 
 .stickyHeader .menuItem {
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .stickyHeader .componRight{
     position: absolute;
     left: 70%;
+}
+
+.stickyHeader .Admin{
+    right: 20px;
+    width: 60%;
+}
+
+.Admin {
+    display: flex;
+    position: absolute;
+    right: 80px;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    z-index: 3;
+    top: 70px;
+    max-width: 150px;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 120px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+  
+.AuthItem {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    font-size: 16px;
+}
+
+.AuthExit {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #ff0000;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
