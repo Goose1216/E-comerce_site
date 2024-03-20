@@ -1,6 +1,5 @@
 from dj_rest_auth.views import PasswordResetConfirmView
-from django.urls import path, include, re_path
-from allauth.account.views import confirm_email
+from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
