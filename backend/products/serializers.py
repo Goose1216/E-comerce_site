@@ -10,6 +10,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializerList(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True, many=True)
+    brand = serializers.StringRelatedField(many=False)
 
     class Meta:
         fields = ('name', 'slug', 'price', 'brand', 'category', 'image')
@@ -18,6 +19,7 @@ class ProductSerializerList(serializers.ModelSerializer):
 
 class ProductSerializerDetail(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True, many=True)
+    brand = serializers.StringRelatedField(many=False)
 
     class Meta:
         fields = ('name', 'slug', 'price', 'brand', 'category', 'image', 'height', "width", 'depth')
