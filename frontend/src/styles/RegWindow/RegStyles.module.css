@@ -22,7 +22,7 @@
 .Window {
     display: flex;
     position: relative;
-    background-color: beige;
+    background-color: rgb(255, 255, 255);
     width: 72%;
     max-width: 600px;
     height: 430px;
@@ -148,4 +148,12 @@
 
 .GoBack:hover {
     padding-left: 10px;
+}
+
+.errorMessage {
+    color: red;
+    background-color: rgb(247, 138, 138);
+    padding: 30px 20px;
+    text-align: center;
+    border: 3px solid rgb(255, 93, 93);
 }
