@@ -9,21 +9,22 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializerList(serializers.ModelSerializer):
+    price_discount = serializers.IntegerField(source="get_price")
     category = CategorySerializer(read_only=True, many=True)
     brand = serializers.StringRelatedField(many=False)
 
     class Meta:
-        fields = ('name', 'slug', 'price', 'brand', 'category', 'image')
+        fields = ('name', 'slug', 'price', "discount", "price_discount", 'brand', 'category', 'image')
         model = Product
 
 
 class ProductSerializerDetail(serializers.ModelSerializer):
+    price_discount = serializers.IntegerField(source="get_price")
     category = CategorySerializer(read_only=True, many=True)
     brand = serializers.StringRelatedField(many=False)
 
     class Meta:
-        fields = ('name', 'slug', 'price', 'brand', 'category', 'image', 'height', "width", 'depth')
+        fields = ('name', 'slug', 'price', "discount", "price_discount", 'brand', 'category', 'image', 'height', "width", 'depth')
         lookup_field = 'slug'
         model = Product
-
 

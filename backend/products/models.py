@@ -1,3 +1,5 @@
+import math
+
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
@@ -18,8 +20,8 @@ class Brand(models.Model):
     # rate - рейтинг всех товаров продавца средний
 
     class Meta:
-        default_related_name = 'brands'
-        verbose_name = 'Бренд'
+        default_related_name = "brands"
+        verbose_name = "Бренд"
         verbose_name_plural = "Бренды"
 
     def __str__(self):
@@ -30,8 +32,8 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="Категория")
 
     class Meta:
-        default_related_name = 'categories'
-        verbose_name = 'Категория'
+        default_related_name = "categories"
+        verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
     def __str__(self):
@@ -41,6 +43,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100, unique=True, db_index=True, verbose_name='Название товара')
     slug = models.SlugField(editable=False)
+    discount = models.PositiveIntegerField(default=0, verbose_name="Скидка в процентах")
     price = models.PositiveIntegerField(db_index=True, verbose_name="Цена")
     image = models.ImageField(upload_to='covers', blank=True, null=True, verbose_name="Изображение")
     height = models.PositiveSmallIntegerField(blank=True, null=True)
@@ -52,8 +55,8 @@ class Product(models.Model):
     class Meta:
         ordering = ['name', ]
         default_related_name = 'products'
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = "Товар"
+        verbose_name_plural = "Товары"
 
     def __str__(self):
         return self.name
@@ -64,6 +67,10 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    @property
+    def get_price(self):
+        return math.ceil(self.price * ((100 - self.discount) / 100))
 
 
 class Review(models.Model):

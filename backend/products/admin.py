@@ -5,9 +5,9 @@ from .models import  Product, Review, Brand, Category
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ["product", "author", "date", "rate"] 
 
+
 class ReviewInline(admin.TabularInline):
     model = Review
-
 
     
 class ProductAdmin(admin.ModelAdmin):
@@ -15,7 +15,11 @@ class ProductAdmin(admin.ModelAdmin):
         ReviewInline,
     ]
     list_filter = ["brand",]
-    list_display = ["name", "price", "brand",]
+    list_display = ["name", "price", "discount", "price_discount", "brand",]
+
+    def price_discount(self, obj):
+        return obj.get_price
+    price_discount.short_description = 'Цена со скидкой'
     
 
     
