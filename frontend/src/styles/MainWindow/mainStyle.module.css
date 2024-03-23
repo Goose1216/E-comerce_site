@@ -57,7 +57,7 @@
     position: relative;
     overflow: hidden;
     z-index: 3;
-    background-color: #1a7e51;
+    background-color: #23ac6e;
 }
 
 .item {
@@ -66,11 +66,11 @@
     flex: 0 0 100%;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    height: 200px;
     border-radius: 30px;
     max-width: 100%;
     padding: 10px;
-    background: radial-gradient(circle, rgb(255, 255, 255) 40%, rgba(31, 116, 77, 0) 90%);
+    background-color: transparent;
 }
 
 .Stock {
@@ -88,7 +88,7 @@
     display: inline-block;
     position: relative;
     cursor: default;
-    margin: 20px auto;
+    margin-top: 40px;
     margin-left: 150px;
     color: #f78820;
     font-size: 35px;

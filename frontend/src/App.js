@@ -1,7 +1,7 @@
 import React, { Component, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import Main from './components/body/Main';
+import Main from './components/Main';
 import Footer from './components/Footer';
 import Login from './Login';
 import Reg from './Reg';

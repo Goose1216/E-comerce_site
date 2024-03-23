@@ -9,9 +9,48 @@
 
 .FooterBlock {
     position: relative;
-    height: 200px;
-    width: 100%;
-    background: linear-gradient(0deg, #4b4b4b,#646464,rgb(160, 160, 160));
-    margin-top: 50px;
+    height: auto;
+    width: 70%;
+    margin-top: 100px;
+    left: 17%;
 }
 
+.FlexBlock {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.InfoTelBlock,
+.AboutInfoBlock {
+    flex: 0 0 auto;
+    width: 80%;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: lighter;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.FlexBlock ul {
+    margin: 15px 0;
+    list-style: none;
+    color: rgb(66, 66, 66);
+}
+
+.FlexBlock li {
+    margin-bottom: 7px;
+}
+
+.InfoTelBlock a {
+    color: green;
+    margin-right: 10px;
+}
+
+.AboutInfoBlock a {
+    text-decoration: none;
+    color: rgb(66, 66, 66);
+}

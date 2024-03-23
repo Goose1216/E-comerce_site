@@ -10,27 +10,31 @@ const Login = () => {
     const [emailOrName, setEmailOrName] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const login = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
-          const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', {
+        const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', {
             username: emailOrName,
             password: password
-          });
+        });
 
-          const token = response.data.key;
+        const token = response.data.key;
 
-          setToken(token);
+        setToken(token);
 
-          navigate('/');
+        navigate('/');
         } catch (error) {
-          setError('Неправильные учетные данные. Пожалуйста, попробуйте снова.');
-          console.error('Ошибка:', error);
+        setError('Неправильные учетные данные. Пожалуйста, попробуйте снова.');
+        console.error('Ошибка:', error);
+        } finally {
+        setLoading(false); // Устанавливаем состояние загрузки обратно в false после выполнения запроса
         }
-      };
+    };
 
   return (
     <div className={regStyles.Body}>
@@ -63,13 +67,10 @@ const Login = () => {
                         required
                     />
 
-                    <button 
-                        className={regStyles.AuthButton}
-                    >
-                            Войти
+                    <button className={regStyles.AuthButton} type="submit" disabled={loading}>
+                        {loading ? <span className={regStyles.spinner}></span> : 'Войти'}
                     </button>
                 </form>
-                <button className={regStyles.RememButton}>Забыли пароль?</button>
                 <Link to="/reg" className={regStyles.RegLink}>Еще не зарегистрированы?</Link>
             </div>
         </div>

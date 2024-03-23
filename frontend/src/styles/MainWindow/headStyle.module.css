@@ -256,14 +256,6 @@ img {
     left: 70%;
 }
 
-.stickyHeader .Admin{
-    max-width: 125px;
-    width: 80%;
-    font-size: 13px;
-    right: 55px;
-    height: 90px;
-}
-
 .Admin {
     display: flex;
     position: absolute;
@@ -279,23 +271,30 @@ img {
     flex-wrap: wrap;
     height: 120px;
     border-radius: 10px;
-    text-decoration: none;
     transition: all 0.2s ease;
-    font-size: 16px;
+}
+
+.stickyHeader .Admin{
+    max-width: 125px;
+    width: 80%;
+    font-size: 13px;
+    right: 55px;
+    height: 90px;
 }
   
 .AuthItem {
     display: block;
-    text-decoration: none;
     color: #000000;
 }
 
 .AuthExit {
-    display: block;
-    text-decoration: none;
     cursor: pointer;
     background-color: transparent;
     border: none;
     color: #ff0000;
-    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.stickyHeader .AuthExit {
+    font-size: 13px;
 }

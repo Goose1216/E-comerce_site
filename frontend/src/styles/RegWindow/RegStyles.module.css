@@ -25,7 +25,7 @@
     background-color: rgb(255, 255, 255);
     width: 72%;
     max-width: 600px;
-    height: 430px;
+    height: 480px;
     border-radius: 40px;
     margin: 40px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -73,7 +73,7 @@
     height: 35px;
     font-size: 15px;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
 }
 
 .RegButton {
@@ -150,10 +150,43 @@
     padding-left: 10px;
 }
 
-.errorMessage {
-    color: red;
-    background-color: rgb(247, 138, 138);
-    padding: 30px 20px;
-    text-align: center;
-    border: 3px solid rgb(255, 93, 93);
+.errorMessageEmail {
+    position: relative;
+    color: rgb(253, 74, 74);
+    font-size: 13px;
+    position: absolute;
+    font-weight: lighter;
+    top: 120px;
 }
+
+.errorMessagePass {
+    position: relative;
+    color: rgb(253, 74, 74);
+    font-size: 13px;
+    position: absolute;
+    font-weight: lighter;
+    top: 195px;
+}
+
+.errorMessagePassConf {
+    position: relative;
+    color: rgb(253, 74, 74);
+    font-size: 13px;
+    position: absolute;
+    font-weight: lighter;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    border-top-color: #333;
+    animation: spin 0.8s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
