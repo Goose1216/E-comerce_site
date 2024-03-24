@@ -25,5 +25,5 @@ class ProductMain(generics.ListAPIView):
     permission_classes = (IsAdminOrReadOnly,)
     queryset = Product.objects.filter(
         Q(category__name="Новинка") |
-        Q(discount__gt=0)).distinct().order_by('discount')
+        Q(discount__gt=0)).distinct().order_by('-discount')
     serializer_class = ProductSerializerList
