@@ -44,7 +44,8 @@ class Product(models.Model):
     name = models.CharField(max_length=100, unique=True, db_index=True, verbose_name='Название товара')
     slug = models.SlugField(editable=False)
     discount = models.PositiveIntegerField(default=0, verbose_name="Скидка в процентах")
-    price = models.PositiveIntegerField(db_index=True, verbose_name="Цена")
+    price_standart = models.PositiveIntegerField(verbose_name="Цена стандартная")
+    price = models.PositiveIntegerField(db_index=True, editable=False, verbose_name="Цена конечная")
     image = models.ImageField(upload_to='covers', blank=True, null=True, verbose_name="Изображение")
     height = models.PositiveSmallIntegerField(blank=True, null=True)
     depth = models.PositiveSmallIntegerField(blank=True, null=True)
@@ -66,11 +67,8 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.price = math.ceil(self.price_standart * ((100 - self.discount) / 100))
         super().save(*args, **kwargs)
-
-    @property
-    def get_price(self):
-        return math.ceil(self.price * ((100 - self.discount) / 100))
 
 
 class Review(models.Model):

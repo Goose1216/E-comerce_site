@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import  Product, Review, Brand, Category
+from .models import Product, Review, Brand, Category
 
 
 class ReviewAdmin(admin.ModelAdmin):
@@ -15,12 +15,8 @@ class ProductAdmin(admin.ModelAdmin):
         ReviewInline,
     ]
     list_filter = ["brand",]
-    list_display = ["name", "price", "discount", "price_discount", "brand",]
+    list_display = ["name", "price_standart", "discount", "price", "brand",]
 
-    def price_discount(self, obj):
-        return obj.get_price
-    price_discount.short_description = 'Цена со скидкой'
-    
 
     
 admin.site.register(Product, ProductAdmin)
