@@ -29,7 +29,8 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="Категория")
+    name = models.CharField(max_length=100, unique=True, verbose_name="Человеко-читаемое название")
+    name_latinica = models.CharField(max_length=100, verbose_name="название на латинице")
 
     class Meta:
         default_related_name = "categories"

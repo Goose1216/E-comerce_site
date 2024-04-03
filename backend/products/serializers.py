@@ -4,7 +4,7 @@ from .models import Product, Category
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ("name",)
+        fields = ("name", "name_latinica")
         model = Category
 
 

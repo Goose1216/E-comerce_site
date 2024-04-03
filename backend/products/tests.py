@@ -51,22 +51,23 @@ class ProductTest(APITestCase):
 
     def test_serializer_list(self):
         response = self.client.get(reverse("product_list"))
+        result = response.json()['results']
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()), 3)
-        self.assertEqual(len(response.json()[0].keys()), 8)
-        self.assertEqual(response.json()[0]["name"], self.product.name)
-        self.assertEqual(response.json()[0]["slug"], self.product.slug)
-        self.assertEqual(response.json()[0]["price"], self.product.price)
-        self.assertEqual(response.json()[0]["price_standart"], self.product.price)
-        self.assertEqual(response.json()[2]["price_standart"], self.product_discount.price_standart)
-        self.assertEqual(response.json()[2]["discount"], self.product_discount.discount)
-        self.assertEqual(response.json()[2]["price"],
+        self.assertEqual(len(result), 3)
+        self.assertEqual(len(result[0].keys()), 8)
+        self.assertEqual(result[0]["name"], self.product.name)
+        self.assertEqual(result[0]["slug"], self.product.slug)
+        self.assertEqual(result[0]["price"], self.product.price)
+        self.assertEqual(result[0]["price_standart"], self.product.price)
+        self.assertEqual(result[2]["price_standart"], self.product_discount.price_standart)
+        self.assertEqual(result[2]["discount"], self.product_discount.discount)
+        self.assertEqual(result[2]["price"],
                          self.product_discount.price * (1 - self.product_discount.discount // 100))
-        self.assertEqual(response.json()[0]["brand"], self.brand.name)
-        self.assertEqual(response.json()[0]["category"][0]["name"], self.category1.name)
-        self.assertEqual(response.json()[0]["category"][1]["name"], self.category2.name)
-        self.assertEqual(len(response.json()[0]["category"]), 2)
-        self.assertEqual(len(response.json()[1]["category"]), 1)
+        self.assertEqual(result[0]["brand"], self.brand.name)
+        self.assertEqual(result[0]["category"][0]["name"], self.category1.name)
+        self.assertEqual(result[0]["category"][1]["name"], self.category2.name)
+        self.assertEqual(len(result[0]["category"]), 2)
+        self.assertEqual(len(result[1]["category"]), 1)
 
     def test_serializer_detail(self):
         response = self.client.get(reverse("product_detail", kwargs={"slug": slugify(self.product_discount.name)}))
@@ -96,7 +97,7 @@ class ProductTest(APITestCase):
         self.assertEqual(response_many.status_code, 200)
         price1 = 0
         test_request = False
-        for product in response_many.json():
+        for product in response_many.json()['results']:
             if product["price"] not in range(100000, 140000 + 1) \
                     or product["brand"].lower not in ("xiamoi", 'apple') \
                     or product['price'] < price1:

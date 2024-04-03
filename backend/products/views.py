@@ -8,7 +8,6 @@ from django.db.models import Q, F, Func
 
 @extend_schema(summary="Отображает список всех товаров")
 class ProductList(generics.ListAPIView):
-    paginate_by = 50
     permission_classes = (IsAdminOrReadOnly,)
     serializer_class = ProductSerializerList
 
@@ -16,14 +15,14 @@ class ProductList(generics.ListAPIView):
         queryset = Product.objects.all()
         sort_by = self.request.query_params.get("sort")
         brand = self.request.query_params.get("brand")
-        #category = self.request.query_params.get('category') - категории сделать английскими, иначе проблема с get запросами
+        category = self.request.query_params.get('category')
         price = self.request.query_params.get("price")
         if sort_by:
             queryset = queryset.order_by(sort_by)
         if brand:
             queryset = queryset.annotate(brand_lower=Func(F("brand__name"), function="LOWER")).filter(brand_lower__in=brand.split('-'))
-        #if category:
-            #queryset = queryset.filter(category__name__in=category.split(","))
+        if category:
+            queryset = queryset.filter(category__name_latinica__in=category.split("-")).distinct()
         if price:
             queryset = queryset.filter(price__gte=price.split('-')[0], price__lte=price.split("-")[-1])
         return queryset
@@ -43,3 +42,10 @@ class ProductMain(generics.ListAPIView):
     queryset_discount = Product.objects.filter(Q(discount__gt=0)).order_by('-discount')[:21]
     queryset = (queryset_new | queryset_discount).order_by('-discount')
     serializer_class = ProductSerializerList
+
+
+
+translation_table = str.maketrans(
+    "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ",
+    "abvgdeezijklmnoprstufhzcss_y_euyaabvgdeezijklmnoprstufhzcss_y_euya"
+)
