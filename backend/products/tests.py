@@ -90,11 +90,13 @@ class ProductTest(APITestCase):
         response_brand_many = self.client.get(reverse("product_list") + "?brand=xiaomi-apple")
         response_price = self.client.get(reverse("product_list") + "?price=100000-140000")
         response_many = self.client.get(reverse("product_list") + "?brand=xiaomi-apple&price=100000-140000&sort=price")
+        response_group = self.client.get(reverse("product_list") + "?group=brand&sort=price")
         self.assertEqual(response_sort.status_code, 200)
         self.assertEqual(response_brand.status_code, 200)
         self.assertEqual(response_brand_many.status_code, 200)
         self.assertEqual(response_price.status_code, 200)
         self.assertEqual(response_many.status_code, 200)
+        self.assertEqual(response_group, 200)
         price1 = 0
         test_request = False
         for product in response_many.json()['results']:

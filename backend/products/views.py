@@ -13,19 +13,59 @@ class ProductList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Product.objects.all()
-        sort_by = self.request.query_params.get("sort")
+
+        query = self.request.query_params.get("q")
+        if query:
+            queryset = self.search_products(queryset, query)
+
         brand = self.request.query_params.get("brand")
-        category = self.request.query_params.get('category')
-        price = self.request.query_params.get("price")
-        if sort_by:
-            queryset = queryset.order_by(sort_by)
         if brand:
-            queryset = queryset.annotate(brand_lower=Func(F("brand__name"), function="LOWER")).filter(brand_lower__in=brand.split('-'))
+            queryset = self.filter_by_brand(queryset, brand)
+
+        category = self.request.query_params.get('category')
         if category:
-            queryset = queryset.filter(category__name_latinica__in=category.split("-")).distinct()
+            queryset = self.filter_by_category(queryset, category)
+
+        price = self.request.query_params.get("price")
         if price:
-            queryset = queryset.filter(price__gte=price.split('-')[0], price__lte=price.split("-")[-1])
-        return queryset
+            queryset = self.filter_by_price(queryset, price)
+
+        sort_by = self.request.query_params.get("sort")
+        group_by = self.request.query_params.get("group")
+        if sort_by and group_by:
+            queryset = self.sort_results(queryset, group_by, sort_by)
+        elif sort_by and not group_by:
+            queryset = self.sort_results(queryset, sort_by)
+        elif group_by:
+            queryset = self.sort_results(queryset, group_by)
+
+        return queryset.select_related("brand")
+
+    @staticmethod
+    def search_products(query, queryset):
+        return queryset.filter(
+            Q(name__icontains=query) |
+            Q(brand__name__icontains=query)
+        )
+
+    @staticmethod
+    def filter_by_brand(queryset, brand):
+        brands = brand.split('-')
+        return queryset.annotate(brand_lower=Func(F("brand__name"), function="LOWER")).filter(brand_lower__in=brands)
+
+    @staticmethod
+    def filter_by_category(queryset, category):
+        categories = category.split("-")
+        return queryset.filter(category__name_latinica__in=categories).distinct()
+
+    @staticmethod
+    def filter_by_price(queryset, price):
+        min_price, max_price = map(int, price.split('-'))
+        return queryset.filter(price__range=(min_price, max_price))
+
+    @staticmethod
+    def sort_results(queryset, *args):
+        return queryset.order_by(*args)
 
 
 @extend_schema(summary="Отображает один конкретный товар")
@@ -35,6 +75,7 @@ class ProductDetail(generics.RetrieveAPIView):
     serializer_class = ProductSerializerDetail
     lookup_field = 'slug'
 
+
 @extend_schema(summary="Отображает список товаров с категорией 'новинка' или с скидкой")
 class ProductMain(generics.ListAPIView):
     permission_classes = (IsAdminOrReadOnly,)
@@ -42,10 +83,3 @@ class ProductMain(generics.ListAPIView):
     queryset_discount = Product.objects.filter(Q(discount__gt=0)).order_by('-discount')[:21]
     queryset = (queryset_new | queryset_discount).order_by('-discount')
     serializer_class = ProductSerializerList
-
-
-
-translation_table = str.maketrans(
-    "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ",
-    "abvgdeezijklmnoprstufhzcss_y_euyaabvgdeezijklmnoprstufhzcss_y_euya"
-)
