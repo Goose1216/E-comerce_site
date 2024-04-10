@@ -14,10 +14,6 @@ class ProductList(generics.ListAPIView):
     def get_queryset(self):
         queryset = Product.objects.all()
 
-        query = self.request.query_params.get("q")
-        if query:
-            queryset = self.search_products(queryset, query)
-
         brand = self.request.query_params.get("brand")
         if brand:
             queryset = self.filter_by_brand(queryset, brand)
@@ -40,13 +36,6 @@ class ProductList(generics.ListAPIView):
             queryset = self.sort_results(queryset, group_by)
 
         return queryset.select_related("brand")
-
-    @staticmethod
-    def search_products(query, queryset):
-        return queryset.filter(
-            Q(name__icontains=query) |
-            Q(brand__name__icontains=query)
-        )
 
     @staticmethod
     def filter_by_brand(queryset, brand):
