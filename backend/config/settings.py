@@ -167,7 +167,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'products.pagination.CustomPagination',
     'PAGE_SIZE': 50
 }
 OLD_PASSWORD_FIELD_ENABLED = True

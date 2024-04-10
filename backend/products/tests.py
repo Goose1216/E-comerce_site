@@ -96,7 +96,7 @@ class ProductTest(APITestCase):
         self.assertEqual(response_brand_many.status_code, 200)
         self.assertEqual(response_price.status_code, 200)
         self.assertEqual(response_many.status_code, 200)
-        self.assertEqual(response_group, 200)
+        self.assertEqual(response_group.status_code, 200)
         price1 = 0
         test_request = False
         for product in response_many.json()['results']:
@@ -108,3 +108,10 @@ class ProductTest(APITestCase):
         else:
             test_request = True
         self.assertEqual(test_request, True)
+
+    def test_search(self):
+        response1 = self.client.get(reverse("product_list") + "?q=Смартфон+Apple+Iphone+13")
+        response2 = self.client.get(reverse("product_list") + "?q=cмартфон+apple+iphone+13")
+        self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response2.status_code, 200)
+        self.assertEqual(response1.json(), response2.json())
