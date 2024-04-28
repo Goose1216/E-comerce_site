@@ -39,7 +39,7 @@ const Main = () => {
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/v1/')
             .then(res => {
-                setTodos(res.data);
+                setTodos(res.data.results);
             })
             .catch(err => {
                 console.log(err);
