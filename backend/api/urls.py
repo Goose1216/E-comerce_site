@@ -2,7 +2,6 @@ from dj_rest_auth.views import PasswordResetConfirmView
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-
 urlpatterns = [
                   path('v1/', include('products.urls'), name='home'),
                   path('api-auth/', include('rest_framework.urls'), name="api_auth"),

@@ -74,7 +74,7 @@ class ProductTest(APITestCase):
         response_fake = self.client.get(reverse("product_detail", kwargs={"slug": "NOSLUG"}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_fake.status_code, 404)
-        self.assertEqual(len(response.json()), 11)
+        self.assertEqual(len(response.json()), 12)
         self.assertEqual(response.json()["name"], self.product_discount.name)
         self.assertEqual(response.json()["slug"], self.product_discount.slug)
         self.assertEqual(response.json()["price"], self.product_discount.price)
@@ -115,3 +115,6 @@ class ProductTest(APITestCase):
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 200)
         self.assertEqual(response1.json(), response2.json())
+
+    def add_to_cart(self):
+        response1 = self.client.POST

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #Local
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
+    'Orders.apps.OrdersConfig',
 ]
 
 
@@ -170,7 +171,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'products.pagination.CustomPagination',
     'PAGE_SIZE': 50
 }
-OLD_PASSWORD_FIELD_ENABLED = True
 
 # CORS
 CORS_ORIGIN_WHITELIST = (
