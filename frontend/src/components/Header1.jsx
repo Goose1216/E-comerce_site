@@ -10,6 +10,7 @@ import { debounce } from 'lodash';
 import { Link } from 'react-router-dom';
 import { getToken, removeToken } from '../authStorage';
 import axios from 'axios';
+import Cart from '../components/Cart/Cart.jsx';
 
 const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/v1/dj-rest-auth/user/',
@@ -18,10 +19,11 @@ const api = axios.create({
   },
 });
 
-const Header = () => {
+const Header = ({ cartItemsCount, setCartItemsCount}) => {
 
   const [username, setUserName] = useState('');
   const [error, setError] = useState('');
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -71,7 +73,6 @@ const Header = () => {
 
 
 
-
   const handleMouseEnter = () => {
     setIsMenuOpen(true);
   };
@@ -92,7 +93,7 @@ const Header = () => {
     };
   }, []);
 
-  
+
 
 
   const [prevScrollY, setPrevScrollY] = useState(0);
@@ -132,7 +133,18 @@ const Header = () => {
     };
   }, [prevScrollY]);
 
-
+   const [cartId, setCartId] = useState('ae39b6eb-7b29-47b9-9a6a-d7baeb249956');
+   useEffect(() => {
+      const fetchCartData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`);
+          setCartItemsCount(response.data.length);
+        } catch (error) {
+          console.error('Ошибка при получении данных о корзине:', error);
+        }
+      };
+  fetchCartData();
+}, []);
 
 
   return (
@@ -153,7 +165,14 @@ const Header = () => {
               <span className={headStyles.otherPoint}>Юридическое соглашение</span>
             </nav>
             <nav className={headStyles.componRight}>
-              <a href="#" className={headStyles.menuItem}><img src={BasketImg}/>Корзина</a>
+               <a href="/cart" className={headStyles.menuItem}>
+                  <img src={BasketImg} />
+                  Корзина
+                  {cartItemsCount > 0 && (
+                    <span className={headStyles.cartItemsCount}>({cartItemsCount})</span>
+                  )}
+                  {!cartItemsCount && <span></span>}
+                </a>
               <div className={headStyles.verticalLine}></div>
               <a href="#" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
               <div className={headStyles.verticalLine}></div>
@@ -165,6 +184,11 @@ const Header = () => {
                 <Link to="/login" className={headStyles.menuItem}><img src={AdminImg} alt="admin" />Войти</Link>
               )}
             </nav>
+            {isCartOpen && (
+            <div className={headStyles.CartOverlay}>
+              <Cart onClose={() => setIsCartOpen(false)} />
+            </div>
+             )}
               {isMenuOpen && (
                 <div className={headStyles.Admin}>
                   <Link to="/account">

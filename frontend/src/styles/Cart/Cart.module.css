@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.CartContainer {
+  background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+  padding: 100px;
+}
+
+.CartTitle {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.CartItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.CartItems li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.CartItems img {
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
+.CartItems h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.CartItems p {
+  font-size: 16px;
+  color: #666;
+}
+
+.QuantityInput {
+  width: 50px;
+  margin-left: 10px;
+}
+
+.AddButton {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.AddButton:hover {
+  background-color: darkgreen;
+}
+
+.RemoveButton {
+  background-color: orange;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.RemoveButton:hover {
+  background-color: darkorange;
+}
+
+.CartSummary {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.CartSummary h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.CartSummary button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
