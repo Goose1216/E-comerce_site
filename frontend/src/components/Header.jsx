@@ -183,6 +183,9 @@ const Header = () => {
             <a href="#" className={headStyles.searchButton}>Поиск</a>
           </div>
         </div>
+        <a href='/catalog' className={headStyles.CatalogContainer}>
+          <p className={headStyles.CatalogButton}>Каталог</p>
+        </a>
     </header>
   );
 }

@@ -5,6 +5,7 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import Login from './Login';
 import Reg from './Reg';
+import CatalogWindow from './Catalog'
 import MainIcon from './img/iconMain.png';
 import appStyles from './styles/appStyles.module.css';
 
@@ -31,6 +32,7 @@ class App extends Component {
                         <Route path="/" element={<Layout />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/reg" element={<Reg />} />
+                        <Route path="/catalog" element={<CatalogWindow />} />
                     </Routes>
                 </div>
             </Router>

@@ -39,6 +39,7 @@ const Main = () => {
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/v1/')
             .then(res => {
+                console.log(res.data.results)
                 setTodos(res.data.results);
             })
             .catch(err => {
@@ -96,8 +97,8 @@ const Main = () => {
                                 <img src={item.image} alt="Изображение товара" />
                             </div>
                             <h1 className={blockStyle.ProductName}>{item.name}</h1>
-                            <span className={blockStyle.OldProductPrice}>{item.price.toLocaleString('ru-RU')} ₽</span>
-                            <span className={blockStyle.ProductPrice}>{item.price_discount.toLocaleString('ru-RU')} ₽</span>
+                            <span className={blockStyle.OldProductPrice}>{item.price_standart.toLocaleString('ru-RU')} ₽</span>
+                            <span className={blockStyle.ProductPrice}>{item.price.toLocaleString('ru-RU')} ₽</span>
                         </div>
                     ))}
                 </div>

@@ -1,0 +1,439 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.Body {
+    display: flex;
+    background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+    width: 100%;
+    height: 100%;
+}
+
+.catalogContainer {
+    width: 80%;
+    margin: auto 10px;
+}
+
+.UpFilterContainer {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+.Choice {
+    display: inline-block;
+    margin-left: 30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: default;
+    width: 260px;
+}
+
+.Choice p {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.ButtonChoice {
+    margin-left: 10px;
+    color: #f78820;
+}
+
+.sortWindow {
+    display: flex;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    list-style-type: none;
+    flex-wrap: wrap;
+    width: 180px;
+}
+
+.sortWindow label {
+    cursor: pointer;
+}
+
+.sortWindowFirst {
+    top: 37px;
+    left: 98px;
+}
+
+.sortWindowSecond {
+    top: 37px;
+    left: 389px;
+}
+
+.filterContainer {
+    width: 20%;
+    height: 500px;
+    z-index: 2;
+    margin-left: 1%;
+}
+
+.Filter {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 12px 15px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    outline: none;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 25px;
+}
+
+.Filter:first-of-type {
+    margin-top: 68px;
+}
+
+.FilterContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.Filter.active {
+    border-radius: 5px 5px 0 0;
+    box-shadow: none;
+    border-bottom: none;
+    color: white;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 45%;
+    right: 10px;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: #424242 transparent transparent transparent;
+    transition: transform 0.3s;
+}
+
+.range_slider_container {
+    display: flex;
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    list-style-type: none;
+    flex-wrap: wrap;
+    width: calc(100% - 20px);
+    max-width: 270px;
+    margin: 0 auto;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .Filter {
+        width: 100%;
+        max-width: none;
+    }
+
+    .range_slider_container {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+
+input[type="range"]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: calc(100% - 30px);
+    outline: none;
+    position: absolute;
+    margin: auto;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.slider_track {
+    width: calc(100% - 40px);
+    height: 3px;
+    background-color: gray;
+    position: absolute;
+    top: 23%;
+    transform: translateY(-50%);
+    left: 20px;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    height: 5px;
+}
+
+input[type="range"]::-moz-range-track{
+    -moz-appearance: none;
+    height: 5px;
+}
+
+input[type="range"]::-ms-track{
+    appearance: none;
+    height: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    height: 1.2em;
+    width: 1.2em;
+    background-color: #ff9100;
+    cursor: pointer;
+    margin-top: -9px;
+    pointer-events: auto;
+    border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb{
+    -moz-appearance: none;
+    height: 1.2em;
+    width: 1.2em;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #ff9100;
+    pointer-events: auto;
+}
+
+input[type="range"]::-ms-thumb{
+    appearance: none;
+    height: 1.2em;
+    width: 1.2em;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #ff9100;
+    pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb{
+    background-color: #ffffff;
+    border: 3px solid #ff9100;
+}
+
+.slider_values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+}
+
+.slider_values p {
+    color: #464646;
+    margin: 0;
+}
+
+.value {
+    width: calc(50% - 10px);
+    max-width: 120px;
+    height: 35px;
+    font-size: 13px;
+    padding: 5px;
+    border: 2px solid #ff9100;
+    border-radius: 8px;
+    outline: none;
+    color: #464646;
+    box-sizing: border-box;
+}
+
+.NoDiscount {
+    text-decoration: none;
+}
+
+.ProductName {
+    display: flex;
+    font-size: 18px;
+    margin: 0 10px;
+    flex-wrap: wrap;
+    white-space: normal;
+    cursor: pointer;
+}
+
+.ProductPrice {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 22px;
+    color: #ff6600;
+}
+
+.OldProductPrice {
+    position: absolute;
+    bottom: 35px;
+    text-decoration: line-through;
+    right: 10px;
+    font-size: 17px;
+    color: #5e5e5e;
+}
+
+.BlockContainer {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.Block {
+    position: relative;
+    border: 1px solid transparent;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    height: 175px;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: flex-start;
+    background-color: white;
+    width: calc(50% - 20px);
+}
+
+.BlockContainer img {
+    display: inline-block;
+    width: auto;
+    height: 140px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    justify-content: center;
+}
+
+.prev_btn,
+.next_btn {
+    cursor: pointer;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30%;
+    color: white;
+    background-color: rgb(0, 182, 70);
+}
+
+.NoWayColor {
+    background-color: rgb(86, 252, 86);
+}
+
+.prev_btn {
+    margin-right: 20px;
+}
+
+.next_btn {
+    margin-left: 20px;
+}
+
+.page_numbers {
+    display: flex;
+    align-items: center;
+}
+
+.page_number {
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(94, 221, 126);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .active {
+    background-color: rgb(49, 180, 77);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .page_number:hover {
+    background-color: rgb(72, 203, 112);
+  }
+
+  .radio_container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  .radio_container:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  .radio_input {
+    display: none;
+  }
+  
+  .radio_label {
+    padding-left: 5px;
+  }
+  .radio_custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .radio_custom::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .radio_input:checked + .radio_custom::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #ffa939;
+    background-color: #ffbd67;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
