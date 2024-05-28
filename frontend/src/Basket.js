@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import CatalogWindow from './components/AllProduct/CatalogWindow';
+import BasketWindow from './components/Basket/BasketWindow';
 import Header from './components/Header';
 
-class Catalog extends Component {
+class Basket extends Component {
     render() {
         return (
             <div>
                 <Header />
-                <CatalogWindow />
+                <BasketWindow />
             </div>
         );
     }
 }
 
-export default Catalog;
+export default Basket;

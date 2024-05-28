@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import mainStyles from '../styles/MainWindow/mainStyle.module.css';
 import blockStyle from '../styles/MainWindow/BlockStyle.module.css';
 import axios from "axios";
+import SalePict from '../img/SalePict.png'
 
 const Main = () => {
 
@@ -99,6 +100,9 @@ const Main = () => {
                             <h1 className={blockStyle.ProductName}>{item.name}</h1>
                             <span className={blockStyle.OldProductPrice}>{item.price_standart.toLocaleString('ru-RU')} ₽</span>
                             <span className={blockStyle.ProductPrice}>{item.price.toLocaleString('ru-RU')} ₽</span>
+                            <div className={blockStyle.SalePicture}>
+                                    <img src={SalePict} alt="Скидка" />
+                            </div>
                         </div>
                     ))}
                 </div>
