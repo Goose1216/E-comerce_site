@@ -3,7 +3,7 @@ from .models import Product
 from .permissions import IsAdminOrReadOnly
 from .serializers import ProductSerializerList, ProductSerializerDetail
 from drf_spectacular.utils import extend_schema
-from django.db.models import Q, F, Func
+from django.db.models import Q, F, Func, Min, Max
 
 
 @extend_schema(summary="Отображает список всех товаров")
@@ -39,7 +39,8 @@ class ProductList(generics.ListAPIView):
         elif group_by:
             queryset = self.sort_results(queryset, group_by)
 
-        return queryset.select_related("brand")
+        queryset = queryset.select_related("brand")
+        return queryset
 
     @staticmethod
     def search_products(queryset, query):

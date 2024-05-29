@@ -168,7 +168,7 @@ REST_FRAMEWORK = {
         ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'products.pagination.CustomPagination',
-    'PAGE_SIZE': 50
+    'PAGE_SIZE': 8
 }
 OLD_PASSWORD_FIELD_ENABLED = True
 
