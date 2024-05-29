@@ -196,21 +196,26 @@ img {
 }
 
 .CatalogContainer {
-    padding: 10px 22px;
     position: absolute;
-    background-color: gray;
-    border-radius: 10px;
-    border: 2px solid rgb(99, 99, 99);
+    left: 15%;
+    top: 130px;
+    background-color: transparent;
+    border: 2px solid #1a7e51;
+    border-radius: 50px 20px 40px 10px;
+    padding: 10px 30px;
     text-decoration: none;
-    top: 19.5%;
-    left: 17%;
+    color: #1a7e51;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+.CatalogContainer:hover {
+    background-color: #1a7e51;
+    color: white;
 }
-
-.CatalogButton {
-    color: rgb(219, 219, 219);
-    font-size: 16px;
-}
-
+  
 .headHalf {
     transition: height 0.2s ease;
 }
@@ -226,28 +231,28 @@ img {
     align-items: center;
     justify-content: space-between;
     transition: all 0.3s ease;
-}
-
-.stickyHeader .logo p {
+  }
+  
+  .stickyHeader .logo p {
     font-size: 30px;
-}
-
-.stickyHeader .other {
+  }
+  
+  .stickyHeader .other {
     display: none;
-}
-
-.stickyHeader .searchBox {
+  }
+  
+  .stickyHeader .searchBox {
     position: absolute;
     left: 30%;
     top: -11px;
-}
-
-.stickyHeader .searchInput {
+  }
+  
+  .stickyHeader .searchInput {
     width: 350px;
     height: 30px;
-}
-
-.stickyHeader .searchButton {
+  }
+  
+  .stickyHeader .searchButton {
     height: 30px;
     width: 30px;
     padding: 0;
@@ -256,23 +261,23 @@ img {
     background-repeat: no-repeat;
     background-position: center;
     font-size: 0;
-}
-
-.stickyHeader .menuItem img {
+  }
+  
+  .stickyHeader .menuItem img {
     width: 17px;
     height: 17px;
-}
-
-.stickyHeader .menuItem {
+  }
+  
+  .stickyHeader .menuItem {
     font-size: 16px;
-}
-
-.stickyHeader .componRight{
+  }
+  
+  .stickyHeader .componRight {
     position: absolute;
     left: 70%;
-}
-
-.Admin {
+  }
+  
+  .Admin {
     display: flex;
     position: absolute;
     right: 70px;
@@ -288,7 +293,7 @@ img {
     height: 120px;
     border-radius: 10px;
     transition: all 0.2s ease;
-}
+  }
 
 .stickyHeader .Admin{
     max-width: 125px;

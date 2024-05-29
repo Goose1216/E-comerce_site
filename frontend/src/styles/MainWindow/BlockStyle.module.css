@@ -30,6 +30,18 @@
     background-color: white;
 }
 
+.SalePicture {
+    position: absolute;
+    left: -20px;
+    top: -20px;
+}
+
+.SalePicture img{
+    max-width: 60px;
+    max-height: 60px;
+    background: radial-gradient(circle, white 50%, transparent 60%);
+}
+
 .BlockContainer img {
     display: inline-block;
     width: auto;

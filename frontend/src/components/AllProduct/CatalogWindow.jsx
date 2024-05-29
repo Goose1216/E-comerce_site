@@ -1,4 +1,5 @@
 import catalogStyle from '../../styles/AllProductStyles/CatalogWindowStyle.module.css';
+import SalePict from '../../img/SalePict.png'
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -101,6 +102,15 @@ const CatalogWindow = () => {
             setCurrentPage(currentPage + 1);
         }
     };
+
+    const handleFirstClick = () => {
+        setCurrentPage(1);
+    };
+    
+    const handleLastClick = () => {
+        setCurrentPage(totalPages);
+    };
+    
 
     const handlePageClick = (page) => {
         setCurrentPage(page);
@@ -308,19 +318,26 @@ const CatalogWindow = () => {
                                     {item.price_standart.toLocaleString('ru-RU')} ₽
                                 </span>
                                 {item.discount > 0 && (
-                                    <span className={catalogStyle.ProductPrice}>
-                                        {item.price.toLocaleString('ru-RU')} ₽
-                                    </span>
+                                    <div>
+                                        <span className={catalogStyle.ProductPrice}>
+                                            {item.price.toLocaleString('ru-RU')} ₽
+                                        </span>
+                                        <div className={catalogStyle.SalePicture}>
+                                            <img src={SalePict} alt="Скидка" />
+                                        </div>
+                                </div>
                                 )}
                             </div>
                         ))}
                     </div>
                     <div className={catalogStyle.controls}>
+                        <div className={catalogStyle.first_btn} onClick={handleFirstClick}>&lt;&lt;</div>
                         <div className={catalogStyle.prev_btn} onClick={handlePrevClick}>&lt;</div>
                         <div className={catalogStyle.page_numbers}>
                             {renderPageNumbers()}
                         </div>
                         <div className={catalogStyle.next_btn} onClick={handleNextClick}>&gt;</div>
+                        <div className={catalogStyle.last_btn} onClick={handleLastClick}>&gt;&gt;</div>
                     </div>
                 </div>
             </div>
