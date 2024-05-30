@@ -52,12 +52,7 @@
     bottom: 10px;
     right: 10px;
     font-size: 22px;
-    color: #ff8c00;
-    text-shadow: 1px 0 1px #000, 
-    0 1px 1px #000, 
-    -1px 0 1px #000, 
-    0 -1px 1px #000;
-    letter-spacing: 0.7px;
+    color: #ff6600;
 }
 
 .OldProductPrice {
@@ -75,13 +70,26 @@
   cursor: pointer;
   position: absolute;
   margin-top: 10px;
-  right: 160px;
+  right: 170px;
   bottom: 10px;
 }
 
 .AddToCartButton img {
   width: 60px;
   height: 30px;
+}
+
+.AddToCartButtonCatalog {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.AddToCartButtonCatalog img {
+  width: 120px !important;
+  height: 60px !important;
 }
 
 .cartItemsCount {

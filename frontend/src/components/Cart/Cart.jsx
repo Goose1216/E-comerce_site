@@ -8,7 +8,7 @@ const Cart = ({ setCartItemsCount }) => {
   const [cartId, setCartId] = useState('ae39b6eb-7b29-47b9-9a6a-d7baeb249956');
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`)
+    fetch(`http://localhost:8000/api/v1/cart/?cart_id=${cartId}`)
       .then(response => response.json())
       .then(data => {
         setCartItems(data);
@@ -25,7 +25,7 @@ const Cart = ({ setCartItemsCount }) => {
     );
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/product/cart/update/${itemPk}/`, {
+      const response = await fetch(`http://localhost:8000/api/v1/cart/update/${itemPk}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const Cart = ({ setCartItemsCount }) => {
         throw new Error('Ошибка обновления количества товара на сервере');
       }
 
-      const updatedCartItems = await fetch(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`)
+      const updatedCartItems = await fetch(`http://localhost:8000/api/v1/cart/?cart_id=${cartId}`)
         .then(response => response.json());
       setCartItems(updatedCartItems);
       setCartItemsCount(updatedCartItems.length);
@@ -75,7 +75,7 @@ const Cart = ({ setCartItemsCount }) => {
                   <button className={cartStyles.AddButton} onClick={async () => {
                     try {
                       await AddToCart(item.product.pk, cartId, 1, setCartItemsCount);
-                      const updatedCartItems = await fetch(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`)
+                      const updatedCartItems = await fetch(`http://localhost:8000/api/v1/cart/?cart_id=${cartId}`)
                         .then(response => response.json());
                       setCartItems(updatedCartItems);
                     } catch (error) {
@@ -85,7 +85,7 @@ const Cart = ({ setCartItemsCount }) => {
                   <button className={cartStyles.RemoveButton} onClick={async () => {
                     try {
                       await removeFromCart(item.pk, cartId, setCartItemsCount);
-                      const updatedCartItems = await fetch(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`)
+                      const updatedCartItems = await fetch(`http://localhost:8000/api/v1/cart/?cart_id=${cartId}`)
                         .then(response => response.json());
                       setCartItems(updatedCartItems);
                     } catch (error) {

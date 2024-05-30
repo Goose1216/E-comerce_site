@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mainStyles from '../styles/MainWindow/mainStyle.module.css';
 import blockStyle from '../styles/MainWindow/BlockStyle.module.css';
+import SalePict from '../img/SalePict.png'
 import AddToCart from './Cart/AddToCart';
 import BasketImg from '../img/orange-basket.png';
+import catalogStyle from '../styles/AllProductStyles/CatalogWindowStyle.module.css';
 import axios from "axios";
 
 const Main = ({ setCartItemsCount }) => {
@@ -36,9 +38,9 @@ const Main = ({ setCartItemsCount }) => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/v1/product/list/')
+    axios.get('http://127.0.0.1:8000/api/v1/product/main/')
       .then(res => {
-        setTodos(res.data.results);
+        setTodos(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -107,6 +109,9 @@ const Main = ({ setCartItemsCount }) => {
               <button className={blockStyle.AddToCartButton} onClick={() => handleAddToCart(item.pk, 1)}>
                 <img src={BasketImg} alt="Корзина" />
               </button>
+              <div className={catalogStyle.SalePicture}>
+                  <img src={SalePict} alt="Скидка" />
+              </div>
               <span className={blockStyle.ProductPrice}>{item.price.toLocaleString('ru-RU')} ₽</span>
             </div>
           ))}

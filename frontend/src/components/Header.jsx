@@ -137,7 +137,7 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
    useEffect(() => {
       const fetchCartData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`);
+          const response = await axios.get(`http://localhost:8000/api/v1/cart/?cart_id=${cartId}`);
           setCartItemsCount(response.data.length);
         } catch (error) {
           console.error('Ошибка при получении данных о корзине:', error);
@@ -207,6 +207,9 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
             <a href="#" className={headStyles.searchButton}>Поиск</a>
           </div>
         </div>
+         <a href='/catalog' className={headStyles.CatalogContainer}>
+          <p className={headStyles.CatalogButton}>Каталог</p>
+        </a>
     </header>
   );
 }

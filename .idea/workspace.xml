@@ -6,8 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="8d96c2b4-2186-472c-bec7-648b223306e6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/AddToCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/AddToCart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/RemoveFromCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/RemoveFromCart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header1.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Main1.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/MainWindow/BlockStyle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/MainWindow/BlockStyle.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/MainWindow/headStyle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/MainWindow/headStyle.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/MainWindow/mainStyle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/MainWindow/mainStyle.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +49,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/E-comerce_site/frontend",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "last_opened_file_path": "D:/E-comerce_site/frontend/src/img",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\E-comerce_site\frontend\src\img" />
       <recent name="D:\E-comerce_site\frontend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -52,7 +64,7 @@
       <recent name="D:\E-comerce_site\backend\api" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests in tests.py (1)">
+  <component name="RunManager" selected="Python tests.Python tests in D:/E-comerce_site/backend/api/products/tests.py">
     <configuration name="Python tests in D:/E-comerce_site/backend/api/products/tests.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="site" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -83,7 +95,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests in tests.py (1)" />
         <item itemvalue="Python tests.Python tests in D:/E-comerce_site/backend/api/products/tests.py" />
       </list>
     </recent_temporary>

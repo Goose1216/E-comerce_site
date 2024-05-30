@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Login from './Login';
 import Reg from './Reg';
 import CartPage from './Cart';
+import CatalogWindow from './Catalog'
 import appStyles from './styles/appStyles.module.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/cart" element={<CartPage setCartItemsCount={setCartItemsCount} cartItemsCount={cartItemsCount}/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
+          <Route path="/catalog" element={<CatalogWindow cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
         </Routes>
       </div>
     </Router>

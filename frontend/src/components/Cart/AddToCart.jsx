@@ -1,6 +1,6 @@
 const AddToCart = async (productId, cartId, cnt_product, setCartItemsCount) => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/product/cart/add/', {
+    const response = await fetch('http://localhost:8000/api/v1/cart/add/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -17,7 +17,7 @@ const AddToCart = async (productId, cartId, cnt_product, setCartItemsCount) => {
       throw new Error(`HTTP error ${response.status}`);
     }
 
-    const cartResponse = await fetch(`http://localhost:8000/api/v1/product/cart/?cart_id=${cartId}`);
+    const cartResponse = await fetch(`http://localhost:8000/api/v1/cart/?cart_id=${cartId}`);
     const cartData = await cartResponse.json();
     setCartItemsCount(cartData.length);
   } catch (error) {
