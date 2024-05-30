@@ -1,13 +1,13 @@
 import headStyles from '../styles/MainWindow/headStyle.module.css';
 import BasketImg from '../img/icon-basket.png';
 import AdminImg from '../img/icon-admin.png';
+import { Link, useNavigate } from 'react-router-dom';
 import BoxImg from '../img/icon-box.png';
 import BackPict from '../img/BackPict.png';
 import BackPictRight from '../img/BackPictRight.png';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
-import { Link } from 'react-router-dom';
 import { getToken, removeToken } from '../authStorage';
 import axios from 'axios';
 import Cart from '../components/Cart/Cart.jsx';
@@ -24,6 +24,9 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
   const [username, setUserName] = useState('');
   const [error, setError] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -49,10 +52,10 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/');
-  
+
       if (response.status === 200) {
         removeToken();
 
@@ -76,7 +79,7 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
   const handleMouseEnter = () => {
     setIsMenuOpen(true);
   };
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -124,7 +127,7 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
         setPrevScrollY(distanceY);
       }
     }, 0);
-    
+
 
     window.addEventListener('scroll', handleScroll);
 
@@ -146,6 +149,10 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
   fetchCartData();
 }, []);
 
+ const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/catalog?query=${encodeURIComponent(searchQuery)}`);
+  };
 
   return (
     <header>
@@ -203,9 +210,16 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
               )}
           </div>
           <div ref={searchBoxRef} className={headStyles.searchBox}>
-            <input className={headStyles.searchInput} type="text" placeholder='Найти товар'/>
-            <a href="#" className={headStyles.searchButton}>Поиск</a>
+            <input
+              className={headStyles.searchInput}
+              type="text"
+              placeholder='Найти товар'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button className={headStyles.searchButton} onClick={handleSearch}>Поиск</button>
           </div>
+
         </div>
          <a href='/catalog' className={headStyles.CatalogContainer}>
           <p className={headStyles.CatalogButton}>Каталог</p>

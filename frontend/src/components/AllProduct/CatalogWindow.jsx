@@ -5,10 +5,14 @@ import AddToCart from '../Cart/AddToCart';
 import React, { useState, useEffect, useRef } from 'react';
 import BasketImg from '../../img/orange-basket.png';
 import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
+import { useSearchParams } from 'react-router-dom';
 
-const CatalogWindow = ({ setCartItemsCount }) => {
+const CatalogWindow = ({ setCartItemsCount, search}) => {
     const [sortPrice, setSortPrice] = useState(false);
     const [sortManufact, setSortManufact] = useState(false);
+
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('query') || ''; // значение по умолчанию
 
     const [isActivePrice, setIsActivePrice] = useState(false);
     const [isActiveManufact, setIsActiveManufact] = useState(false);
@@ -76,6 +80,7 @@ const CatalogWindow = ({ setCartItemsCount }) => {
 
     const getSortingKey1 = (value) => Object.keys(sortingOptions1).find(key => sortingOptions1[key] === value);
     const getSortingKey2 = (value) => Object.keys(sortingOptions2).find(key => sortingOptions2[key] === value);
+    const getSearch = (value) => Object.keys(sortingOptions2).find(key => sortingOptions2[key] === value);
 
     useEffect(() => {
         fetchData();
@@ -88,6 +93,7 @@ const CatalogWindow = ({ setCartItemsCount }) => {
         params.set('sort', getSortingKey1(sortingOption1));
         params.set('minPrice', minPrice);
         params.set('maxPrice', maxPrice);
+        params.set('q', query);
 
         axios.get(`http://127.0.0.1:8000/api/v1/product/list?${params.toString()}`)
             .then(response => {
