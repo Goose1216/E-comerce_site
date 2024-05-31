@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.AllContainer {
+  background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+  padding: 100px;
+}
+
+.OrdersContainer {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.OrdersList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.OrderCard {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.OrderCard:last-child {
+  border-bottom: none;
+}
+
+.OrderCard h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.OrderCard p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.OrderItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.OrderItems li {
+  margin-bottom: 20px;
+}
+
+.OrderItems img {
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
+.OrderItems div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.OrderItems h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.OrderItems p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.OrderSummary {
+  margin-top: 20px;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.OrderSummary p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.OrderSummary p:last-child {
+  font-size: 14px;
+  color: #666;
+}

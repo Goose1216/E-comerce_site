@@ -1,12 +1,9 @@
 import math
-import uuid
 
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.template.defaultfilters import slugify
-
-from Orders.models import Order
 
 
 Rate = (
@@ -96,24 +93,4 @@ class Review(models.Model):
         return Product.objects.get(pk=self.product.pk).get_absolute_url()
 
 
-class CartItem(models.Model):
-    order = models.ForeignKey(Order, blank=True, null=True, on_delete=models.CASCADE, related_name='cartItems',
-                              verbose_name="Заказ")
-    cart_id = models.UUIDField(default=uuid.uuid4)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cartItems', verbose_name='Товар')
-    quantity = models.PositiveIntegerField(blank=True, default=1, db_index=True, verbose_name="Количество товара")
 
-    class Meta:
-        default_related_name = 'cartItems'
-        verbose_name = "Товар в корзине"
-        verbose_name_plural = "Товары в корзине"
-
-    def __str__(self):
-        return self.product.name + " - " + str(self.quantity) + " штуки"
-
-    def get_absolute_url(self):
-        return reverse('cart_list', args={'uuid': self.cart_id})
-
-    @property
-    def get_total_price(self):
-        return self.product.price * self.quantity

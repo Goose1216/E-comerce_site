@@ -7,6 +7,7 @@ import Login from './Login';
 import Reg from './Reg';
 import CartPage from './Cart';
 import CatalogWindow from './Catalog'
+import OrderPage from './Orders'
 import appStyles from './styles/appStyles.module.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/catalog" element={<CatalogWindow cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+          <Route path="/orders" element={<OrderPage cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
         </Routes>
       </div>
     </Router>

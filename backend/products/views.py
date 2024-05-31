@@ -1,9 +1,7 @@
-import uuid
-
 from rest_framework import generics
-from .models import Product, CartItem
-from .permissions import IsAdminOrReadOnly, IsAdminOrReadOnlyAndPost, IsAdminOrReadOnlyAndDelete, IsAdminOrReadOnlyAndPut
-from .serializers import ProductSerializerList, ProductSerializerDetail, CartItemSerializerList, CartItemSerializerAll, CartItemSerializerUpdate
+from .models import Product
+from .permissions import IsAdminOrReadOnly, IsAdminOrReadOnlyAndPost
+from .serializers import ProductSerializerList, ProductSerializerDetail
 from drf_spectacular.utils import extend_schema
 from django.db.models import Q, F, Func
 
@@ -87,50 +85,3 @@ class ProductMain(generics.ListAPIView):
     queryset = (queryset_new | queryset_discount).order_by('-discount')
     serializer_class = ProductSerializerList
 
-
-@extend_schema(summary="Отображает все элементы корзины для текущей сессии")
-class CartItemsList(generics.ListAPIView):
-    pagination_class = None
-    permission_classes = (IsAdminOrReadOnly,)
-    serializer_class = CartItemSerializerList
-
-    def get_queryset(self):
-        queryset = CartItem.objects.filter(cart_id=self.request.query_params['cart_id'])
-        return queryset
-
-
-@extend_schema(summary="Добавляет предметы в корзину")
-class CartItemsAdd(generics.CreateAPIView):
-    permission_classes = (IsAdminOrReadOnlyAndPost,)
-    serializer_class = CartItemSerializerAll
-
-    def perform_create(self, serializer):
-        try:
-            obj = CartItem.objects.get(cart_id=self.request.data['cart_id'],
-                                       product=Product.objects.get(pk=self.request.data['product']))
-            quantity = self.request.data['quantity']
-            quantity = 1 if quantity == '' else quantity
-            obj.quantity += int(quantity)
-            obj.save()
-        except:
-            cart_id = self.request.data['cart_id']
-            cart_id = uuid.uuid4() if cart_id == '' else cart_id
-            quantity = self.request.data['quantity']
-            quantity = 1 if quantity == '' else quantity
-            serializer.save(cart_id=cart_id,
-                            product=Product.objects.get(pk=self.request.data['product']),
-                            quantity=quantity)
-
-
-@extend_schema(summary="Удаляет предметы из корзины")
-class CartItemsRemove(generics.DestroyAPIView):
-    permission_classes = (IsAdminOrReadOnlyAndDelete,)
-    serializer_class = CartItemSerializerAll
-    queryset = CartItem.objects.all()
-
-
-@extend_schema(summary='Обновляет количество товаров в корзине')
-class CartItemsUpdate(generics.UpdateAPIView):
-    permission_classes = (IsAdminOrReadOnlyAndPut, )
-    serializer_class = CartItemSerializerUpdate
-    queryset = CartItem.objects.all()

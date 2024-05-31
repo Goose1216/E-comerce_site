@@ -10,7 +10,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { getToken, removeToken } from '../authStorage';
 import axios from 'axios';
-import Cart from '../components/Cart/Cart.jsx';
+import Cart from './Cart/Cart.jsx';
+import Orders from './Orders/Orders.jsx';
 
 const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/v1/dj-rest-auth/user/',
@@ -181,14 +182,14 @@ const Header = ({ cartItemsCount, setCartItemsCount}) => {
                   {!cartItemsCount && <span></span>}
                 </a>
               <div className={headStyles.verticalLine}></div>
-              <a href="#" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
+              <a href="/orders" className={headStyles.menuItem}><img src={BoxImg}/>Заказы</a>
               <div className={headStyles.verticalLine}></div>
               {username ? (
                 <span className={headStyles.menuItem} onClick={handleMouseEnter} ref={menuRef}>
                   {username}
                 </span>
               ) : (
-                <Link to="/login" className={headStyles.menuItem}><img src={AdminImg} alt="admin" />Войти</Link>
+                <Link to="/login" className={headStyles.menuItem}><img src={AdminImg} alt="admin" ref={menuRef}/>Войти</Link>
               )}
             </nav>
             {isCartOpen && (

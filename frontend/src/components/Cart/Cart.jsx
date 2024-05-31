@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddToCart from './AddToCart';
 import removeFromCart from './RemoveFromCart';
+import CreateOrder from '../Orders/CreateOrder';
 import cartStyles from '../../styles/Cart/Cart.module.css';
 
 const Cart = ({ setCartItemsCount }) => {
@@ -24,6 +25,8 @@ const Cart = ({ setCartItemsCount }) => {
       )
     );
 
+
+
     try {
       const response = await fetch(`http://localhost:8000/api/v1/cart/update/${itemPk}/`, {
         method: 'PUT',
@@ -44,6 +47,11 @@ const Cart = ({ setCartItemsCount }) => {
     } catch (error) {
       console.error('Ошибка обновления количества товара:', error);
     }
+  };
+
+  const handleCreateOrder = async () => {
+    await CreateOrder(setCartItemsCount);
+    window.location.reload();
   };
 
   return (
@@ -100,7 +108,7 @@ const Cart = ({ setCartItemsCount }) => {
       )}
       <div className={cartStyles.CartSummary}>
         <h2>Общая сумма: {cartItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0).toLocaleString('ru-RU')} ₽</h2>
-        <button>Оформить заказ</button>
+        <button onClick={() => handleCreateOrder()}>Оформить заказ</button>
       </div>
     </div>
   );

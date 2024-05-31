@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Category, CartItem
+from .models import Product, Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -26,27 +26,4 @@ class ProductSerializerDetail(serializers.ModelSerializer):
                   'height', "width", 'depth')
         lookup_field = 'slug'
         model = Product
-
-
-class CartItemSerializerList(serializers.ModelSerializer):
-    product = ProductSerializerDetail(many=False)
-    get_total_price = serializers.ReadOnlyField()
-
-    class Meta:
-        fields = ('pk', 'product', 'quantity', 'cart_id', 'get_total_price')
-        model = CartItem
-
-
-class CartItemSerializerUpdate(serializers.ModelSerializer):
-
-    class Meta:
-        fields = ('quantity', )
-        model = CartItem
-
-
-class CartItemSerializerAll(serializers.ModelSerializer):
-
-    class Meta:
-        fields = '__all__'
-        model = CartItem
 
