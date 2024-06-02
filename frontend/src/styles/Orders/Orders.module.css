@@ -12,19 +12,8 @@
   padding: 100px;
 }
 
-.OrdersContainer {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .OrdersList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    max-width:600px
 }
 
 .OrderCard {
@@ -53,22 +42,24 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
 }
 
-.OrderItems li {
-  margin-bottom: 20px;
+.OrderItem {
+  display: inline-block;
+  max-width: 600px;
+  margin-left: 60px;
+}
+
+.OrderItem:first-child{
+  margin-left: 0;
 }
 
 .OrderItems img {
+  display: inline-block;
   width: 150px;
   height: 150px;
   margin-right: 10px;
-}
-
-.OrderItems div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .OrderItems h3 {
@@ -93,9 +84,10 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #111;
 }
 
 .OrderSummary p:last-child {
   font-size: 14px;
-  color: #666;
+  color: #111;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ordersStyles from '../../styles/Orders/Orders.module.css';
-import { getToken, removeToken } from '../../authStorage';
+import { getToken } from '../../authStorage';
 
 const Orders = ({ setCartItemsCount }) => {
   const [orders, setOrders] = useState([]);
@@ -38,12 +38,10 @@ const Orders = ({ setCartItemsCount }) => {
                 {order.cartItems.map((item) => (
                   <li key={item.pk} className={ordersStyles.OrderItem}>
                     <img src={item.product.image} alt={item.product.name} />
-                    <div>
-                      <h3>{item.product.name}</h3>
-                      <p>Цена: {item.product.price?.toLocaleString('ru-RU')} ₽</p>
-                      <p>Количество: {item.quantity}</p>
-                      <p>Итого: {item.get_total_price.toLocaleString('ru-RU')} ₽</p>
-                    </div>
+                    <h3>{item.product.name}</h3>
+                    <p>Цена: {item.product.price?.toLocaleString('ru-RU')} ₽</p>
+                    <p>Количество: {item.quantity}</p>
+                    <p>Итого: {item.get_total_price.toLocaleString('ru-RU')} ₽</p>
                   </li>
                 ))}
               </ul>

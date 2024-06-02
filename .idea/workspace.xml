@@ -5,25 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d96c2b4-2186-472c-bec7-648b223306e6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/Orders/permissions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/Orders/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Orders/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Orders/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Orders/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Orders/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Orders/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Orders/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Orders/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Orders/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/asgi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/products/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/products/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/products/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/products/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/products/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/products/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/products/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/products/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/products/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/products/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/MainWindow/BlockStyle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/MainWindow/BlockStyle.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Orders/Orders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Orders/Orders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/Orders/Orders.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/Orders/Orders.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +35,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/E-comerce_site/backend/cart",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/E-comerce_site/backend/cart&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\E-comerce_site\backend\cart" />
