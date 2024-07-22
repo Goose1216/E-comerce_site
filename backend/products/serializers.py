@@ -19,7 +19,7 @@ class ProductSerializerList(serializers.ModelSerializer):
     brand = serializers.StringRelatedField(many=False)
 
     class Meta:
-        fields = ('name', 'slug', 'price_standart', "discount", "price", 'brand', 'category', 'image',)
+        fields = ('name', 'slug', 'price_standart', "discount", "price", 'brand', 'category', 'image', 'pk')
         model = Product
 
 
@@ -28,7 +28,7 @@ class ProductSerializerDetail(serializers.ModelSerializer):
     brand = serializers.StringRelatedField(many=False)
 
     class Meta:
-        fields = ('name', 'slug', 'price_standart', "discount", "price", 'brand', 'category', 'image', 'height', "width", 'depth')
+        fields = ('name', 'slug', 'price_standart', "discount", "price", 'brand', 'category', 'image', 'height', "width", 'depth', 'pk')
         lookup_field = 'slug'
         model = Product
 
