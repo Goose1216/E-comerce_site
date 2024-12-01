@@ -46,12 +46,16 @@ const CatalogWindow = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [minPrice, setMinPrice] = useState(0);
-    const [maxPrice, setMaxPrice] = useState(1000);
+    const [maxPrice, setMaxPrice] = useState(10000000);
+    const [absoluteMinPrice, setAbsoluteMinPrice] = useState(0);
+    const [absoluteMaxPrice, setAbsoluteMaxPrice] = useState(10000000);
+    const [brands, setBrands] = useState([]);
+    const [selectedBrands, setSelectedBrands] = useState([]);
     const [sortingOption1, setSortingOption1] = useState('Сначала дорогие');
     const [sortingOption2, setSortingOption2] = useState('По бренду');
     const [sortChoice1, setSortChoice1] = useState(false);
     const [sortChoice2, setSortChoice2] = useState(false);
-    const location = useLocation(); // Получаем текущий URL
+    const location = useLocation();
 
     const sortWindowRef1 = useRef(null);
     const sortWindowRef2 = useRef(null);
@@ -64,14 +68,14 @@ const CatalogWindow = () => {
 
     const sortingOptions2 = {
         'brand': 'По бренду',
-        'manufacturer': 'По производителю',
         'in_stock': 'В наличии'
     };
 
     const getQueryParams = () => {
-        const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(location.search);
         return {
           q: params.get('q') || '',
+          brand: params.get('brand') ? params.get('brand').split('-') : [],
         };
     };
 
@@ -80,19 +84,24 @@ const CatalogWindow = () => {
 
     useEffect(() => {
         fetchData();
-    }, [currentPage, sortingOption1, sortingOption2, minPrice, maxPrice]);
+    }, [currentPage, sortingOption1, sortingOption2, location.search]);
 
     const fetchData = () => {
         const params = new URLSearchParams();
         params.set('page', currentPage);
         // params.set('group', getSortingKey2(sortingOption2));
         params.set('sort', getSortingKey1(sortingOption1));
-        params.set('minPrice', minPrice);
-        params.set('maxPrice', maxPrice);
-        const { q } = getQueryParams();
+        const priceRange = `${minPrice}-${maxPrice}`;
+        params.set('price', priceRange);
+        const { q, brand} = getQueryParams();
         if (q) {
-          params.set('q', q); // Если q существует, добавляем его в параметры запроса
+          params.set('q', q);
         }
+        if (selectedBrands.length > 0) {
+          params.set('brand', selectedBrands.join('-'));
+        }
+
+
 
         axios.get(`http://127.0.0.1:8000/api/v1/products/list?${params.toString()}`)
             .then(response => {
@@ -100,13 +109,26 @@ const CatalogWindow = () => {
                 setNextPage(response.data.next);
                 setPrevPage(response.data.previous);
                 setTotalPages(response.data.count_pages);
+                setBrands(response.data.brands);
+                setAbsoluteMinPrice(response.data.min_price);
+                setAbsoluteMaxPrice(response.data.max_price);
+                if (minPrice == 0) {
+                    setMinPrice(response.data.min_price)
+                }
+                if (maxPrice == 10000000) {
+                    setMaxPrice(response.data.max_price)
+                }
             })
             .catch(error => console.error('Error fetching data: ', error));
     };
 
-    useEffect(() => {
-        fetchData();
-    }, [currentPage, sortingOption1, minPrice, maxPrice, location.search]);
+    const handleBrandChange = (brand) => {
+        if (selectedBrands.includes(brand)) {
+          setSelectedBrands(selectedBrands.filter(b => b !== brand));
+        } else {
+          setSelectedBrands([...selectedBrands, brand]);
+        }
+      };
 
     const handlePrevClick = () => {
         if (prevPage !== null) {
@@ -135,19 +157,15 @@ const CatalogWindow = () => {
 
     const handleMinPriceChange = (event) => {
         const newMinPrice = parseInt(event.target.value);
-        if (newMinPrice < maxPrice) {
+        if (newMinPrice < maxPrice - 100) {
             setMinPrice(newMinPrice);
-        } else {
-            setMinPrice(maxPrice);
         }
-    };
+            };
 
     const handleMaxPriceChange = (event) => {
         const newMaxPrice = parseInt(event.target.value);
-        if (newMaxPrice > minPrice) {
+        if (newMaxPrice - 100 > minPrice) {
             setMaxPrice(newMaxPrice);
-        } else {
-            setMaxPrice(minPrice);
         }
     };
 
@@ -161,6 +179,10 @@ const CatalogWindow = () => {
 
     const handleMouseEnter1 = () => setSortChoice1(true);
     const handleMouseEnter2 = () => setSortChoice2(true);
+
+    const handleConfirmPrices = () => {
+        fetchData();
+    };
 
     const renderPageNumbers = () => {
         const pages = [];
@@ -194,19 +216,17 @@ const CatalogWindow = () => {
                                 <div className={catalogStyle.slider_track}></div>
                                 <input
                                     type="range"
-                                    min="0"
-                                    max="1000"
+                                    min={absoluteMinPrice}
+                                    max={absoluteMaxPrice}
                                     value={minPrice}
                                     onChange={handleMinPriceChange}
-                                    onInput={handleMinPriceChange}
                                 />
                                 <input
                                     type="range"
-                                    min="0"
-                                    max="1000"
+                                    min={absoluteMinPrice}
+                                    max={absoluteMaxPrice}
                                     value={maxPrice}
                                     onChange={handleMaxPriceChange}
-                                    onInput={handleMaxPriceChange}
                                 />
                             </div>
                             <div className={catalogStyle.slider_values}>
@@ -214,17 +234,28 @@ const CatalogWindow = () => {
                                 <p>---</p>
                                 <input type="text" value={`До: ${maxPrice}`} className={catalogStyle.value} readOnly />
                             </div>
-                        </div>
-                    )}
-                    <div className={catalogStyle.Filter} onClick={handleMouseEnterManufact}>
-                        <div className={catalogStyle.arrow} style={{ transform: isActiveManufact ? 'rotate(180deg)' : 'rotate(0deg)' }}></div>
-                        Производитель
-                    </div>
-                    {sortManufact && (
-                        <div className={catalogStyle.range_slider_container}>
 
                         </div>
                     )}
+                    <div className={catalogStyle.Filter} onClick={() => { setSortManufact(!sortManufact); setIsActiveManufact(!isActiveManufact); }}>
+                    <div className={catalogStyle.arrow} style={{ transform: isActiveManufact ? 'rotate(180deg)' : 'rotate(0deg)' }}></div>
+                    Бренды
+                  </div>
+                  {sortManufact && (
+                    <div className={catalogStyle.brandContainer}>
+                      {brands.map((brand) => (
+                        <label key={brand} className={catalogStyle.brandItem}>
+                          <input
+                            type="checkbox"
+                            checked={selectedBrands.includes(brand)}
+                            onChange={() => handleBrandChange(brand)}
+                          />
+                          {brand}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                    <button onClick={handleConfirmPrices} className={catalogStyle.confirmButton}>Подтвердить</button>
                 </div>
                 <div className={catalogStyle.catalogContainer}>
                     <div className={catalogStyle.UpFilterContainer}>
@@ -291,19 +322,6 @@ const CatalogWindow = () => {
                                             />
                                             <span className={catalogStyle.radio_custom}></span>
                                             <span className={catalogStyle.radio_label}>По бренду</span>
-                                        </label>
-                                        <br />
-                                        <br />
-                                        <label className={catalogStyle.radio_container}>
-                                            <input
-                                                type="radio"
-                                                value="manufacturer"
-                                                checked={sortingOption2 === 'По производителю'}
-                                                onChange={handleSortingChange2}
-                                                className={catalogStyle.radio_input}
-                                            />
-                                            <span className={catalogStyle.radio_custom}></span>
-                                            <span className={catalogStyle.radio_label}>По производителю</span>
                                         </label>
                                         <br />
                                         <br />

@@ -52,7 +52,7 @@ class ProductList(generics.ListAPIView):
 
     @staticmethod
     def filter_by_brand(queryset, brand):
-        brands = brand.split('-')
+        brands = map(lambda x: x.lower(), brand.split('-'))
         return queryset.annotate(brand_lower=Func(F("brand__name"), function="LOWER")).filter(brand_lower__in=brands)
 
     @staticmethod

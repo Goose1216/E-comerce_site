@@ -462,4 +462,60 @@ input[type="range"]:active::-webkit-slider-thumb{
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
+
+ .confirmButton {
+    width: 15%;
+    height: 5%;
+    left: 3.3%;
+    position: absolute;
+    background-color: #4CAF50; /* Зеленый цвет фона */
+    border: none; /* Без границы */
+    color: white; /* Белый цвет текста */
+    text-align: center; /* Центрирование текста */
+    text-decoration: none; /* Без подчеркивания */
+    display: inline-block; /* Чтобы кнопка была блочным элементом */
+    font-size: 16px; /* Размер шрифта */
+    margin-top: 10px; /* Отступ сверху */
+    cursor: pointer; /* Указатель при наведении */
+    border-radius: 5px; /* Закругленные углы */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+
+.confirmButton:hover {
+    background-color: #45a049; /* Цвет фона при наведении */
+}
+
+.confirmButton:active {
+    background-color: #3e8e41; /* Цвет фона при нажатии */
+}
+
+.brandContainer {
+    display: flex;
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    list-style-type: none;
+    flex-wrap: wrap;
+    width: calc(100% - 20px);
+    max-width: 270px;
+    margin: 0 auto;
+}
+
+.brandItem {
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    align-items: center; /* Центрируем элементы по вертикали */
+    margin: 5px 0; /* Отступы между элементами */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.2s ease; /* Плавный переход цвета фона */
+}
+
+.brandItem input[type="checkbox"] {
+    margin-right: 10px; /* Отступ между чекбоксом и текстом */
+}
+
+.brandItem:hover {
+    background-color: #f0f0f0; /* Цвет фона при наведении */
+}
