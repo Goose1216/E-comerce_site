@@ -44,6 +44,7 @@ class ProductList(generics.ListAPIView):
 
     @staticmethod
     def search_products(queryset, query):
+        # Несмотря на icontains запрос регистрочувствительный
         return queryset.filter(
             Q(name__icontains=query) |
             Q(brand__name__icontains=query)
@@ -79,6 +80,7 @@ class ProductDetail(generics.RetrieveAPIView):
 
 @extend_schema(summary="Отображает список товаров с категорией 'новинка' или с скидкой")
 class ProductMain(generics.ListAPIView):
+    pagination_class = None
     permission_classes = (IsAdminOrReadOnly,)
     queryset_new = Product.objects.filter(Q(category__name="Новинка")).order_by('price')[:24]
     queryset_discount = Product.objects.filter(Q(discount__gt=0)).order_by('-discount')[:21]

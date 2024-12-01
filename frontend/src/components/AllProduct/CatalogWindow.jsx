@@ -2,6 +2,7 @@ import catalogStyle from '../../styles/AllProductStyles/CatalogWindowStyle.modul
 import SalePict from '../../img/SalePict.png'
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const CatalogWindow = () => {
     const [sortPrice, setSortPrice] = useState(false);
@@ -50,6 +51,7 @@ const CatalogWindow = () => {
     const [sortingOption2, setSortingOption2] = useState('По бренду');
     const [sortChoice1, setSortChoice1] = useState(false);
     const [sortChoice2, setSortChoice2] = useState(false);
+    const location = useLocation(); // Получаем текущий URL
 
     const sortWindowRef1 = useRef(null);
     const sortWindowRef2 = useRef(null);
@@ -66,6 +68,13 @@ const CatalogWindow = () => {
         'in_stock': 'В наличии'
     };
 
+    const getQueryParams = () => {
+        const params = new URLSearchParams(location.search);
+        return {
+          q: params.get('q') || '',
+        };
+    };
+
     const getSortingKey1 = (value) => Object.keys(sortingOptions1).find(key => sortingOptions1[key] === value);
     const getSortingKey2 = (value) => Object.keys(sortingOptions2).find(key => sortingOptions2[key] === value);
 
@@ -80,8 +89,12 @@ const CatalogWindow = () => {
         params.set('sort', getSortingKey1(sortingOption1));
         params.set('minPrice', minPrice);
         params.set('maxPrice', maxPrice);
+        const { q } = getQueryParams();
+        if (q) {
+          params.set('q', q); // Если q существует, добавляем его в параметры запроса
+        }
 
-        axios.get(`http://127.0.0.1:8000/api/v1/list?${params.toString()}`)
+        axios.get(`http://127.0.0.1:8000/api/v1/products/list?${params.toString()}`)
             .then(response => {
                 setData(response.data.results);
                 setNextPage(response.data.next);
@@ -90,6 +103,10 @@ const CatalogWindow = () => {
             })
             .catch(error => console.error('Error fetching data: ', error));
     };
+
+    useEffect(() => {
+        fetchData();
+    }, [currentPage, sortingOption1, minPrice, maxPrice, location.search]);
 
     const handlePrevClick = () => {
         if (prevPage !== null) {
@@ -106,11 +123,11 @@ const CatalogWindow = () => {
     const handleFirstClick = () => {
         setCurrentPage(1);
     };
-    
+
     const handleLastClick = () => {
         setCurrentPage(totalPages);
     };
-    
+
 
     const handlePageClick = (page) => {
         setCurrentPage(page);

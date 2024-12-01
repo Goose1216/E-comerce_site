@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { debounce } from 'lodash';
-import { Link } from 'react-router-dom';
 import { getToken, removeToken } from '../authStorage';
 import axios from 'axios';
 import headStyles from '../styles/MainWindow/headStyle.module.css';
@@ -21,11 +21,13 @@ const Header = () => {
   const [username, setUserName] = useState('');
   const [error, setError] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const prevScrollY = useRef(0);
   const navbarRef = useRef(null);
   const searchBoxRef = useRef(null);
   const headHalfRef = useRef(null);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -51,10 +53,10 @@ const Header = () => {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/');
-  
+
       if (response.status === 200) {
         removeToken();
         window.location.reload();
@@ -69,6 +71,22 @@ const Header = () => {
 
   const handleMouseEnter = () => {
     setIsMenuOpen(true);
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (query) {
+      // Перенаправление на страницу каталога с параметром q
+      navigate(`/catalog?q=${encodeURIComponent(query)}`);
+      setQuery(''); // Очистка поля поиска после перенаправления
+    }
+  };
+
+  // Обработчик нажатия клавиш
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch(e); // Вызываем функцию поиска при нажатии Enter
+    }
   };
 
   useEffect(() => {
@@ -160,8 +178,15 @@ const Header = () => {
           )}
         </div>
         <div ref={searchBoxRef} className={headStyles.searchBox}>
-          <input className={headStyles.searchInput} type="text" placeholder='Найти товар' />
-          <a href="#" className={headStyles.searchButton}>Поиск</a>
+            <input
+                className={headStyles.searchInput}
+                type="text"
+                placeholder='Найти товар'
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyPress={handleKeyPress} // Добавляем обработчик нажатия клавиш
+            />
+            <button type="button" className={headStyles.searchButton} onClick={handleSearch}>Поиск</button>
         </div>
       </div>
       <a href='/catalog' className={headStyles.CatalogContainer}>

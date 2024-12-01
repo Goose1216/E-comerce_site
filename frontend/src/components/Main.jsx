@@ -38,10 +38,10 @@ const Main = () => {
     const [todos, setTodos] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/v1/')
+        axios.get('http://127.0.0.1:8000/api/v1/products/main/')
             .then(res => {
-                console.log(res.data.results)
-                setTodos(res.data.results);
+                console.log(res.data)
+                setTodos(res.data);
             })
             .catch(err => {
                 console.log(err);
