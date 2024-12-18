@@ -3,9 +3,11 @@ import axios from 'axios';
 import cartStyles from '../../styles/Cart/Cart.module.css';
 import DeleteFromCart from './DeleteFromCart';
 import UpdateCart from './UpdateCart';
-
+import AddToCart from './AddToCart';
+import { useCart } from '../../CartContext';
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
+    const { setCartQuantity } = useCart();
 
     useEffect(() => {
         fetchCart();
@@ -22,17 +24,15 @@ const Cart = () => {
         setCartItems(response.data);
     };
 
-
-
     const handleDeleteButton = async (productId) => {
         try {
-            const response = await DeleteFromCart(productId);
+            const response = await DeleteFromCart(productId, setCartQuantity);
 
             if (response.status === 200) {
                 setCartItems(prevItems => prevItems.filter(item => item.pk !== productId));
-                console.log('Товар был успешно удалён', response.data)
+                console.log('Товар был успешно удалён', response.data);
             } else if (response.status === 204) {
-                console.log('Товар не был удалён')
+                console.log('Товар не был удалён');
             } else {
                 console.error('Ошибка при удалении товара:', response.data);
             }
@@ -46,24 +46,21 @@ const Cart = () => {
             const response = await UpdateCart(productId, countItem);
 
             if (response.status === 200) {
-            setCartItems(prevItems =>
-                prevItems.map(item =>
-                    item.pk === productId ? { ...item, count: countItem } : item
-                ),
-            console.log('Количество товара обновлено:', response.data),
-            );
-            }else if (response.status === 204){
-                console.log("Товар не был обновлён:", response.data)
-            }
-
-             else {
+                setCartItems(prevItems =>
+                    prevItems.map(item =>
+                        item.pk === productId ? { ...item, count: countItem } : item
+                    )
+                );
+                console.log('Количество товара обновлено:', response.data);
+            } else if (response.status === 204) {
+                console.log("Товар не был обновлён:", response.data);
+            } else {
                 console.error('Ошибка при обновлении товара:', response.data);
-                }
+            }
         } catch (error) {
-        console.error('Ошибка при обновлении количества:', error);
-    }
-
-    }
+            console.error('Ошибка при обновлении количества:', error);
+        }
+    };
 
     return (
         <div className={cartStyles.CartContainer}>
@@ -79,31 +76,31 @@ const Cart = () => {
                                 <h2>{item.name}</h2>
                                 <p>Цена: {item.price.toLocaleString('ru-RU')} ₽</p>
                                 <p>
-                                Количество:
-                                <div className={cartStyles.QuantityContainer}>
-                                    <button
-                                        className={cartStyles.QuantityButton}
-                                        onClick={() => handleUpdateButton(item.pk, item.count - 1)}
-                                        disabled={item.count <= 1} // Отключаем кнопку, если количество меньше или равно 1
-                                    >
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        value={item.count}
-                                        onChange={(e) => handleUpdateButton(item.pk, parseInt(e.target.value, 10))}
-                                        className={cartStyles.QuantityInput}
-                                    />
-                                    <button
-                                        className={cartStyles.QuantityButton}
-                                        onClick={() => handleUpdateButton(item.pk, item.count + 1)}
-                                    >
-                                        +
-                                    </button>
-                                </div>
-                            </p>
-                            <p>Итого: {(item.count * item.price).toLocaleString('ru-RU')} ₽</p>
+                                    Количество:
+                                    <div className={cartStyles.QuantityContainer}>
+                                        <button
+                                            className={cartStyles.QuantityButton}
+                                            onClick={() => handleUpdateButton(item.pk, item.count - 1)}
+                                            disabled={item.count <= 1} // Отключаем кнопку, если количество меньше или равно 1
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            value={item.count}
+                                            onChange={(e) => handleUpdateButton(item.pk, parseInt(e.target.value, 10))}
+                                            className={cartStyles.QuantityInput}
+                                        />
+                                        <button
+                                            className={cartStyles.QuantityButton}
+                                            onClick={() => handleUpdateButton(item.pk, item.count + 1)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </p>
+                                <p>Итого: {(item.count * item.price).toLocaleString('ru-RU')} ₽</p>
                                 <div className={cartStyles.ButtonGroup}>
                                     <button
                                         className={cartStyles.RemoveButton}

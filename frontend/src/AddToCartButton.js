@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styles from './styles/MainWindow/BlockStyle.module.css';
 import AddToCart from './components/Cart/AddToCart';
 
-const AddToCartButton = ({ imageSrc, activeImageSrc, productId, countItem }) => {
+
+const AddToCartButton = ({ imageSrc, activeImageSrc, productId, countItem, setCartQuantity }) => {
     const [isActive, setIsActive] = useState(false);
 
-    const handleAddToCart = async (productId, countItem) => {
+    const handleAddToCart = async (productId, countItem, setCartQuantity) => {
 
         if (isActive) {
             return;
@@ -13,7 +14,7 @@ const AddToCartButton = ({ imageSrc, activeImageSrc, productId, countItem }) => 
 
         setIsActive(true);
 
-        await AddToCart(productId, countItem);
+        await AddToCart(productId, countItem, setCartQuantity);
 
 
         setTimeout(() => {
@@ -24,7 +25,7 @@ const AddToCartButton = ({ imageSrc, activeImageSrc, productId, countItem }) => 
     return (
         <button
             className={`${styles.AddToCartButtonCatalog} ${isActive ? styles.active : ''}`}
-            onClick={() => handleAddToCart(productId, countItem)}
+            onClick={() => handleAddToCart(productId, countItem, setCartQuantity)}
             disabled={isActive}
         >
             <img src={isActive ? activeImageSrc : imageSrc} alt="Добавить в корзину" />

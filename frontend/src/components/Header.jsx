@@ -9,6 +9,7 @@ import AdminImg from '../img/icon-admin.png';
 import BoxImg from '../img/icon-box.png';
 import BackPict from '../img/BackPict.png';
 import BackPictRight from '../img/BackPictRight.png';
+import { useCart } from '../CartContext';
 
 const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/v1/dj-rest-auth/user/',
@@ -27,6 +28,9 @@ const Header = () => {
   const searchBoxRef = useRef(null);
   const headHalfRef = useRef(null);
   const menuRef = useRef(null);
+
+  const { cartQuantity, setCartQuantity } = useCart();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +53,23 @@ const Header = () => {
     };
 
     fetchUserInfo();
+    fetchCartQuantity();
   }, []);
+
+  const fetchCartQuantity = async () => {
+    try {
+        const response = await axios.get('http://localhost:8000/api/v1/products/cart/get/', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        });
+        setCartQuantity(response.data.length);
+        } catch (error) {
+      console.error('Ошибка при получении количества товаров в корзине:', error);
+    }
+  };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -76,13 +96,11 @@ const Header = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (query) {
-      // Перенаправление на страницу каталога с параметром q
       navigate(`/catalog?q=${encodeURIComponent(query)}`);
       setQuery(''); // Очистка поля поиска после перенаправления
     }
   };
 
-  // Обработчик нажатия клавиш
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearch(e); // Вызываем функцию поиска при нажатии Enter
@@ -151,7 +169,13 @@ const Header = () => {
             <span className={headStyles.otherPoint}>Юридическое соглашение</span>
           </nav>
           <nav className={headStyles.componRight}>
-            <a href="/cart" className={headStyles.menuItem}><img src={BasketImg} alt="cart" />Корзина</a>
+            <Link to="/cart" className={headStyles.menuItem}>
+              <img src={BasketImg} alt="cart" />
+              Корзина
+              {cartQuantity > 0 && (
+                <span className={headStyles.cartQuantity}>{cartQuantity}</span>
+              )}
+            </Link>
             <div className={headStyles.verticalLine}></div>
             <a href="#" className={headStyles.menuItem}><img src={BoxImg} alt="box" />Заказы</a>
             <div className={headStyles.verticalLine}></div>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const DeleteFromCart = async (productId) => {
+const DeleteFromCart = async (productId, setCartQuantity) => {
     try {
         const response = await axios.delete('http://localhost:8000/api/v1/products/cart/delete/', {
             headers: {
@@ -10,6 +10,8 @@ const DeleteFromCart = async (productId) => {
             withCredentials: true,
             data: { product: productId }
         });
+
+        setCartQuantity(prevQuantity => prevQuantity - 1);
 
         return response;
     } catch (error) {

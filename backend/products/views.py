@@ -116,14 +116,14 @@ class AddToCartView(APIView):
                     item = next(iter_cart)
                     if item['product'] == pk:
                         item['count'] += 1
-                        response = Response({'message': 'Товар Обновлён'})
+                        response = Response({'message': 'Товар Обновлён'}, status=204)
                         is_append = False
                         break
                 except StopIteration:
                     break
             if is_append:
                 cart.append(data)
-                response = Response({'message': 'Товар добавлен'})
+                response = Response({'message': 'Товар добавлен'}, status=200)
             week = datetime.datetime.now() + datetime.timedelta(days=7)
             response.set_cookie('cart', json.dumps(cart), max_age=week.timestamp())
         except:

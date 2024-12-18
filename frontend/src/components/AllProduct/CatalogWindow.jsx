@@ -7,8 +7,10 @@ import AddToCartButton from '../../AddToCartButton.js';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useCart } from '../../CartContext';
 
 const CatalogWindow = () => {
+
     const [sortPrice, setSortPrice] = useState(false);
     const [sortManufact, setSortManufact] = useState(false);
 
@@ -61,6 +63,7 @@ const CatalogWindow = () => {
     const [sortChoice1, setSortChoice1] = useState(false);
     const [sortChoice2, setSortChoice2] = useState(false);
     const location = useLocation();
+    const { setCartQuantity } = useCart();
 
     const sortWindowRef1 = useRef(null);
     const sortWindowRef2 = useRef(null);
@@ -159,7 +162,6 @@ const CatalogWindow = () => {
     const handlePageClick = (page) => {
         setCurrentPage(page);
     };
-
     const handleMinPriceChange = (event) => {
         const newMinPrice = parseInt(event.target.value);
         if (newMinPrice < maxPrice - 100) {
@@ -187,6 +189,10 @@ const CatalogWindow = () => {
 
     const handleConfirmPrices = () => {
         fetchData();
+    };
+
+    const handleAddToCart = () => {
+
     };
 
     const renderPageNumbers = () => {
@@ -362,6 +368,7 @@ const CatalogWindow = () => {
                                    activeImageSrc={CartImgActive}
                                    productId = {item.pk}
                                    countItem = {1}
+                                   setCartQuantity = {setCartQuantity}
                                    className={blockStyle.AddToCartButtonCatalog} >
                                    <img src={CartImg} alt="Корзина" />
                                  </AddToCartButton >
