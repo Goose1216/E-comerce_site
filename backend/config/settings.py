@@ -173,10 +173,11 @@ REST_FRAMEWORK = {
 OLD_PASSWORD_FIELD_ENABLED = True
 
 # CORS
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-    'http://localhost:8000',
-)
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
 
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

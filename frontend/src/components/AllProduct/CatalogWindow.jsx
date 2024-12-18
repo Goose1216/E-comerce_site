@@ -1,5 +1,9 @@
 import catalogStyle from '../../styles/AllProductStyles/CatalogWindowStyle.module.css';
+import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 import SalePict from '../../img/SalePict.png'
+import CartImg from '../../img/orange-cart.png';
+import CartImgActive from '../../img/green-cart.png';
+import AddToCartButton from '../../AddToCartButton.js';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -24,8 +28,9 @@ const CatalogWindow = () => {
     const handleClickOutside = (event, ref, setState) => {
         if (ref.current && !ref.current.contains(event.target)) {
             setState(false);
-        }
+        };
     };
+
 
     useEffect(() => {
         const handleClick = (event) => {
@@ -112,10 +117,10 @@ const CatalogWindow = () => {
                 setBrands(response.data.brands);
                 setAbsoluteMinPrice(response.data.min_price);
                 setAbsoluteMaxPrice(response.data.max_price);
-                if (minPrice == 0) {
+                if (minPrice === 0) {
                     setMinPrice(response.data.min_price)
                 }
-                if (maxPrice == 10000000) {
+                if (maxPrice === 10000000) {
                     setMaxPrice(response.data.max_price)
                 }
             })
@@ -352,6 +357,14 @@ const CatalogWindow = () => {
                                 <span className={item.discount > 0 ? catalogStyle.OldProductPrice : catalogStyle.ProductPrice}>
                                     {item.price_standart.toLocaleString('ru-RU')} ₽
                                 </span>
+                                 <AddToCartButton
+                                   imageSrc={CartImg}
+                                   activeImageSrc={CartImgActive}
+                                   productId = {item.pk}
+                                   countItem = {1}
+                                   className={blockStyle.AddToCartButtonCatalog} >
+                                   <img src={CartImg} alt="Корзина" />
+                                 </AddToCartButton >
                                 {item.discount > 0 && (
                                     <div>
                                         <span className={catalogStyle.ProductPrice}>

@@ -71,7 +71,7 @@ const Main = () => {
                                     {chunk.map(item => (
                                     <div className={blockStyle.Block} key={item.id}>
                                         <div>
-                                            <img src={item.image} alt="Изображение товара" />
+                                            <img src={item.image} alt={item.name} />
                                         </div>
                                         <h1 className={blockStyle.ProductName}>{item.name}</h1>
                                         <span className={blockStyle.ProductPrice}>{item.price.toLocaleString('ru-RU')} ₽</span>
@@ -95,7 +95,7 @@ const Main = () => {
                     {discount.map(item => (
                         <div className={blockStyle.Block} key={item.id}>
                             <div>
-                                <img src={item.image} alt="Изображение товара" />
+                                 <img src={item.image} alt={item.name} />
                             </div>
                             <h1 className={blockStyle.ProductName}>{item.name}</h1>
                             <span className={blockStyle.OldProductPrice}>{item.price_standart.toLocaleString('ru-RU')} ₽</span>

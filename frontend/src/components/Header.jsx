@@ -151,7 +151,7 @@ const Header = () => {
             <span className={headStyles.otherPoint}>Юридическое соглашение</span>
           </nav>
           <nav className={headStyles.componRight}>
-            <a href="/basket" className={headStyles.menuItem}><img src={BasketImg} alt="basket" />Корзина</a>
+            <a href="/cart" className={headStyles.menuItem}><img src={BasketImg} alt="cart" />Корзина</a>
             <div className={headStyles.verticalLine}></div>
             <a href="#" className={headStyles.menuItem}><img src={BoxImg} alt="box" />Заказы</a>
             <div className={headStyles.verticalLine}></div>

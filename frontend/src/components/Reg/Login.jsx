@@ -21,7 +21,9 @@ const Login = () => {
         const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/login/', {
             username: emailOrName,
             password: password
-        });
+        },
+        );
+
 
         const token = response.data.key;
 
@@ -32,7 +34,7 @@ const Login = () => {
         setError('Неправильные учетные данные. Пожалуйста, попробуйте снова.');
         console.error('Ошибка:', error);
         } finally {
-        setLoading(false); // Устанавливаем состояние загрузки обратно в false после выполнения запроса
+        setLoading(false);
         }
     };
 

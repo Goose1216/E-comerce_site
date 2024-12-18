@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import BasketWindow from './components/Basket/BasketWindow';
+import CartWindow from './components/Cart/CartWindow';
 import Header from './components/Header';
 
-class Basket extends Component {
+class Cart extends Component {
     render() {
         return (
             <div>
                 <Header />
-                <BasketWindow />
+                <CartWindow />
             </div>
         );
     }
 }
 
-export default Basket;
+export default Cart;

@@ -4,6 +4,9 @@ from .models import Brand, Category, Product
 from django.template.defaultfilters import slugify
 
 
+import json
+
+
 class ProductTest(APITestCase):
 
     @classmethod
@@ -54,7 +57,7 @@ class ProductTest(APITestCase):
         result = response.json()['results']
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(result), 3)
-        self.assertEqual(len(result[0].keys()), 8)
+        self.assertEqual(len(result[0].keys()), 9)
         self.assertEqual(result[0]["name"], self.product.name)
         self.assertEqual(result[0]["slug"], self.product.slug)
         self.assertEqual(result[0]["price"], self.product.price)
@@ -74,7 +77,7 @@ class ProductTest(APITestCase):
         response_fake = self.client.get(reverse("product_detail", kwargs={"slug": "NOSLUG"}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_fake.status_code, 404)
-        self.assertEqual(len(response.json()), 11)
+        self.assertEqual(len(response.json()), 12)
         self.assertEqual(response.json()["name"], self.product_discount.name)
         self.assertEqual(response.json()["slug"], self.product_discount.slug)
         self.assertEqual(response.json()["price"], self.product_discount.price)
@@ -115,3 +118,49 @@ class ProductTest(APITestCase):
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 200)
         self.assertEqual(response1.json(), response2.json())
+
+    def test_add_to_cart(self):
+        response1 = self.client.post(reverse('add_to_cart'), data={'product': 1, 'count': 1}, format='json')
+        response2 = self.client.post(reverse('add_to_cart'), data={'product': 1, 'count': 1}, format='json')
+        response3 = self.client.post(reverse('add_to_cart'), data={'product': 2, 'count': 1}, format='json')
+        cart_cookie = json.loads(response3.cookies['cart'].value)
+        self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response2.status_code, 200)
+        self.assertEqual(response3.status_code, 200)
+        self.assertEqual(len(cart_cookie), 2)
+        self.assertEqual(cart_cookie[0]['count'], 2)
+        self.assertEqual(cart_cookie[1]['count'], 1)
+        response4 = self.client.post(reverse('add_to_cart'), data={})
+        self.assertEqual(response4.status_code, 400)
+
+    def test_delete_from_cart(self):
+        self.client.post(reverse('add_to_cart'), data={'product': 1, 'count': 1}, format='json')
+        self.client.post(reverse('add_to_cart'), data={'product': 1, 'count': 1}, format='json')
+        response = self.client.post(reverse('add_to_cart'), data={'product': 2, 'count': 1}, format='json')
+        cart_cookie = json.loads(response.cookies['cart'].value)
+        self.assertEqual(len(cart_cookie), 2)
+        self.assertEqual(cart_cookie[0]['count'], 2)
+        self.assertEqual(cart_cookie[1]['count'], 1)
+        response = self.client.delete(reverse("delete_from_cart"), data={'product': 1}, format='json')
+        self.assertEqual(response.status_code, 200)
+        cart_cookie = json.loads(response.cookies['cart'].value)
+        self.assertEqual(len(cart_cookie), 1)
+        self.assertEqual(cart_cookie[0]['count'], 1)
+        response = self.client.delete(reverse("delete_from_cart"), data={'product': 9999999}, format='json')
+        self.assertEqual(response.status_code, 204)
+
+    def test_update_cart(self):
+        self.client.post(reverse('add_to_cart'), data={'product': 1, 'count': 1}, format='json')
+        self.client.post(reverse('add_to_cart'), data={'product': 2, 'count': 1}, format='json')
+        response = self.client.put(reverse('update_cart'), data={'product': 2, 'new_count': 3}, format='json')
+        self.assertEqual(response.status_code, 200)
+        cart_cookie = json.loads(response.cookies['cart'].value)
+        self.assertEqual(len(cart_cookie), 2)
+        self.assertEqual(cart_cookie[0]['count'], 1)
+        self.assertEqual(cart_cookie[1]['count'], 3)
+        response = self.client.put(reverse('update_cart'), data={'product': 999999, 'new_count': 3}, format='json')
+        self.assertEqual(response.status_code, 204)
+        response = self.client.put(reverse('update_cart'), data={'product': 2, 'new_count': -4}, format='json')
+        self.assertEqual(response.status_code, 400)
+        response = self.client.put(reverse('update_cart'), data={'product': 2}, format='json')
+        self.assertEqual(response.status_code, 400)

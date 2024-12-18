@@ -8,7 +8,7 @@ export const getToken = () => {
   return token;
 };
 
-export const setToken = (token, expiryDays = 7) => {
+export const setToken = (token, expiryDays = 14) => {
   const expiryDate = new Date();
   expiryDate.setDate(expiryDate.getDate() + expiryDays);
 
