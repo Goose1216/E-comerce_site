@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import ProductDetail from './ProductDetail';
 import Login from './Login';
 import Reg from './Reg';
 import Cart from './Cart';
 import CatalogWindow from './Catalog';
 import MainIcon from './img/iconMain.png';
 import appStyles from './styles/appStyles.module.css';
-import { CartProvider } from './CartContext'; // Импортируем провайдер контекста
+import { CartProvider } from './CartContext';
 
 class App extends Component {
     componentDidMount() {
@@ -34,6 +35,7 @@ class App extends Component {
                             <Route path="/reg" element={<Reg />} />
                             <Route path="/catalog" element={<CatalogWindow />} />
                             <Route path="/cart" element={<Cart />} />
+                            <Route path="/:slug" element={<ProductDetail />} />
                         </Routes>
                     </div>
                 </CartProvider>

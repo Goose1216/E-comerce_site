@@ -519,3 +519,9 @@ input[type="range"]:active::-webkit-slider-thumb{
 .brandItem:hover {
     background-color: #f0f0f0; /* Цвет фона при наведении */
 }
+
+.addToCartButton {
+  position: absolute;
+  right: 0;
+  bottom: 60px;
+}

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.DetailContainer {
+  background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+  padding-left: 150px;
+  padding-top: 10px;
+}
+
+.productDetailContainer {
+    display: flex; /* Используем flexbox для расположения изображения и текста */
+    align-items: flex-start; /* Выравниваем элементы по верхнему краю */
+}
+
+.textLoadingOrError {
+    background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+    padding: 100px;
+    font-size: 30px;
+    color: darkorange;
+    text-align: center;
+}
+
+.productImage {
+     width: 30%; /* Ширина изображения */
+    height: auto; /* Автоматическая высота */
+    border-radius: 8px; /* Закругленные углы */
+    margin-right: 20px; /* Отступ справа от изображения */
+}
+
+.productInfo {
+    width: 70%; /* Ширина текстовой части */
+    margin: 30px;
+
+}
+
+.productName {
+    font-size: 50px; /* Размер шрифта для названия товара */
+    font-weight: bold; /* Жирный шрифт */
+    margin: 15px 0; /* Отступы сверху и снизу */
+}
+
+.productBrand {
+    font-size: 30px; /* Размер шрифта для бренда */
+    font-weight: bold;
+   color: #333; /* Темный цвет текста */
+}
+
+
+.productPrice {
+    margin-top: 20px;
+    font-size: 25px; /* Размер шрифта для цены товара */
+    color: #333; /* Темный цвет текста */
+}
+
+.discountPrice {
+    margin:15px;
+    font-size: 18px; /* Размер шрифта для скидки */
+    color: #5e5e5e;
+    text-decoration: line-through;
+}
+
+.productCategories {
+    margin-top: 20px; /* Отступ сверху для категорий */
+}
+
+.productCategories h2 {
+    font-size: 20px; /* Размер шрифта заголовка категорий */
+}
+
+.productCategories ul {
+    list-style-type: none; /* Убираем маркеры у списка */
+    padding-left: 0; /* Убираем отступ слева у списка */
+}
+
+.productCategories li {
+    font-size: 16px; /* Размер шрифта для категорий */
+    color: #555; /* Цвет текста категорий */
+}
+
+.addToCartContainer {
+   margin-top: 20px;
+   display: flex;
+   justify-content: flex-start; /* Выравнивание по левому краю */
+}

@@ -3,7 +3,7 @@ import math
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from django.template.defaultfilters import slugify
+from pytils.translit import slugify
 
 Rate = (
     ('1', 'Ужасно'),

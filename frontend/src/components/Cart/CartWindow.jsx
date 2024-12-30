@@ -4,6 +4,7 @@ import cartStyles from '../../styles/Cart/Cart.module.css';
 import DeleteFromCart from './DeleteFromCart';
 import UpdateCart from './UpdateCart';
 import AddToCart from './AddToCart';
+import { useLocation, Link } from 'react-router-dom';
 import { useCart } from '../../CartContext';
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -71,7 +72,9 @@ const Cart = () => {
                 <ul className={cartStyles.CartItems}>
                     {cartItems.map(item => (
                         <li key={item.pk} className={cartStyles.CartItem}>
-                            <img src={item.image} alt={item.name} />
+                            <Link to={`/${item.slug}`}>
+                              <img src={item.image} alt="Изображение товара" />
+                            </Link>
                             <div>
                                 <h2>{item.name}</h2>
                                 <p>Цена: {item.price.toLocaleString('ru-RU')} ₽</p>

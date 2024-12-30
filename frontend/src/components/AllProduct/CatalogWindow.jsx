@@ -6,11 +6,11 @@ import CartImgActive from '../../img/green-cart.png';
 import AddToCartButton from '../../AddToCartButton.js';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useCart } from '../../CartContext';
+import { useLocation, Link } from 'react-router-dom';
+
 
 const CatalogWindow = () => {
-
     const [sortPrice, setSortPrice] = useState(false);
     const [sortManufact, setSortManufact] = useState(false);
 
@@ -357,12 +357,15 @@ const CatalogWindow = () => {
                         {data.map(item => (
                             <div className={catalogStyle.Block} key={item.id}>
                                 <div>
-                                    <img src={item.image} alt="Изображение товара" />
+                                <Link to={`/${item.slug}`}>
+                                  <img src={item.image} alt="Изображение товара" />
+                                </Link>
                                 </div>
                                 <h1 className={catalogStyle.ProductName}>{item.name}</h1>
                                 <span className={item.discount > 0 ? catalogStyle.OldProductPrice : catalogStyle.ProductPrice}>
                                     {item.price_standart.toLocaleString('ru-RU')} ₽
                                 </span>
+                                <div className = {catalogStyle.addToCartButton}>
                                  <AddToCartButton
                                    imageSrc={CartImg}
                                    activeImageSrc={CartImgActive}
@@ -372,6 +375,7 @@ const CatalogWindow = () => {
                                    className={blockStyle.AddToCartButtonCatalog} >
                                    <img src={CartImg} alt="Корзина" />
                                  </AddToCartButton >
+                                 </div>
                                 {item.discount > 0 && (
                                     <div>
                                         <span className={catalogStyle.ProductPrice}>

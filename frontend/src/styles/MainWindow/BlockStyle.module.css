@@ -95,9 +95,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  position: absolute;
-  right: 0;
-  bottom: 60px;
+
 }
 
 .AddToCartButtonCatalog img {

@@ -3,6 +3,7 @@ import mainStyles from '../styles/MainWindow/mainStyle.module.css';
 import blockStyle from '../styles/MainWindow/BlockStyle.module.css';
 import axios from "axios";
 import SalePict from '../img/SalePict.png'
+import { useLocation, Link } from 'react-router-dom';
 
 const Main = () => {
 
@@ -71,7 +72,9 @@ const Main = () => {
                                     {chunk.map(item => (
                                     <div className={blockStyle.Block} key={item.id}>
                                         <div>
-                                            <img src={item.image} alt={item.name} />
+                                            <Link to={`/${item.slug}`}>
+                                              <img src={item.image} alt="Изображение товара" />
+                                            </Link>
                                         </div>
                                         <h1 className={blockStyle.ProductName}>{item.name}</h1>
                                         <span className={blockStyle.ProductPrice}>{item.price.toLocaleString('ru-RU')} ₽</span>
@@ -95,7 +98,9 @@ const Main = () => {
                     {discount.map(item => (
                         <div className={blockStyle.Block} key={item.id}>
                             <div>
-                                 <img src={item.image} alt={item.name} />
+                                 <Link to={`/${item.slug}`}>
+                                      <img src={item.image} alt="Изображение товара" />
+                                </Link>
                             </div>
                             <h1 className={blockStyle.ProductName}>{item.name}</h1>
                             <span className={blockStyle.OldProductPrice}>{item.price_standart.toLocaleString('ru-RU')} ₽</span>
