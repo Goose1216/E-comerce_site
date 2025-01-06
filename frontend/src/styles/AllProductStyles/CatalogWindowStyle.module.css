@@ -398,13 +398,13 @@ input[type="range"]:active::-webkit-slider-thumb{
     transition: background-color 0.3s, transform 0.3s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .active {
     background-color: rgb(49, 180, 77);
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   .page_number:hover {
     background-color: rgb(72, 203, 112);
   }
@@ -419,11 +419,11 @@ input[type="range"]:active::-webkit-slider-thumb{
   .radio_container:last-of-type {
     margin-bottom: 0;
   }
-  
+
   .radio_input {
     display: none;
   }
-  
+
   .radio_label {
     padding-left: 5px;
   }
@@ -435,7 +435,7 @@ input[type="range"]:active::-webkit-slider-thumb{
     display: inline-block;
     position: relative;
   }
-  
+
   .radio_custom::before {
     content: "";
     display: block;
@@ -448,7 +448,7 @@ input[type="range"]:active::-webkit-slider-thumb{
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
+
   .radio_input:checked + .radio_custom::after {
     content: "";
     display: block;

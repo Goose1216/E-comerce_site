@@ -192,9 +192,6 @@ const Header = () => {
           </nav>
           {isMenuOpen && (
             <div className={headStyles.Admin}>
-              <Link to="/account" className={headStyles.AuthItem}>
-                Личный кабинет
-              </Link>
               <button className={headStyles.AuthExit} onClick={handleLogout}>
                 Выйти
               </button>
