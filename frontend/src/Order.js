@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import CatalogWindow from './components/AllProduct/CatalogWindow';
+import OrderWindow from './components/Order/OrderWindow';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { getToken } from './authStorage';
 
-class Catalog extends Component {
+class Order extends Component {
     render() {
+        const token = getToken();
+
         return (
             <div>
                 <Header />
-                <CatalogWindow />
+                <OrderWindow token={token} />
                 <Footer />
             </div>
         );
     }
 }
 
-export default Catalog;
+export default Order;

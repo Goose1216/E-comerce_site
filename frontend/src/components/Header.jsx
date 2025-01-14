@@ -177,7 +177,7 @@ const Header = () => {
               )}
             </Link>
             <div className={headStyles.verticalLine}></div>
-            <a href="#" className={headStyles.menuItem}><img src={BoxImg} alt="box" />Заказы</a>
+           <Link to="/order" className={headStyles.menuItem}><img src={BoxImg} alt="box" />Заказы</Link>
             <div className={headStyles.verticalLine}></div>
             {username ? (
               <span className={headStyles.menuItem} onClick={handleMouseEnter} ref={menuRef}>

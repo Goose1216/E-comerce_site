@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.OrderContainer {
+    background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+    padding: 50px;
+}
+
+.OrderList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.OrderItem {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.OrderProduct {
+    margin-left: 20px;
+}

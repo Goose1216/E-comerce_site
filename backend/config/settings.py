@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #Local
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 

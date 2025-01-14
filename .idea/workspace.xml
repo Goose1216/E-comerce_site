@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="8d96c2b4-2186-472c-bec7-648b223306e6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Catalog.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Catalog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/CartWindow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/CartWindow.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/AllProductStyles/CatalogWindowStyle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/AllProductStyles/CatalogWindowStyle.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,17 +43,17 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/E-comerce_site_test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/E-comerce_site_test/backend/orders&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\E-comerce_site_test\backend\orders" />
       <recent name="D:\E-comerce_site_test\frontend\src\styles\Cart" />
       <recent name="D:\E-comerce_site_test\frontend\src\img" />
       <recent name="D:\E-comerce_site_test\backend\cart" />
       <recent name="D:\E-comerce_site_test\frontend\src\components\AllProduct" />
-      <recent name="D:\E-comerce_site\frontend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\E-comerce_site_test\frontend\src\img" />
@@ -120,5 +124,20 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/backend" />
     </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend/orders1/serializers.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend/orders/serializers.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

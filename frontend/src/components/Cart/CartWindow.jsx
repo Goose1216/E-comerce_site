@@ -4,8 +4,10 @@ import cartStyles from '../../styles/Cart/Cart.module.css';
 import DeleteFromCart from './DeleteFromCart';
 import UpdateCart from './UpdateCart';
 import AddToCart from './AddToCart';
+import OrderCreate from '../Order/OrderCreate';
 import { useLocation, Link } from 'react-router-dom';
 import { useCart } from '../../CartContext';
+
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const { setCartQuantity } = useCart();
@@ -63,6 +65,8 @@ const Cart = () => {
         }
     };
 
+
+
     return (
         <div className={cartStyles.CartContainer}>
             <h1>Корзина</h1>
@@ -119,7 +123,7 @@ const Cart = () => {
             )}
             <div className={cartStyles.CartSummary}>
                 <h2>Общая сумма: {cartItems.reduce((acc, item) => acc + item.count * item.price, 0).toLocaleString('ru-RU')} ₽</h2>
-                <button>Оформить заказ</button>
+                <button onClick={() => OrderCreate(setCartItems, setCartQuantity)}>Оформить заказ</button>
             </div>
         </div>
     );
