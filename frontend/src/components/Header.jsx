@@ -205,7 +205,7 @@ const Header = () => {
                 placeholder='Найти товар'
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyPress={handleKeyPress} // Добавляем обработчик нажатия клавиш
+                onKeyPress={handleKeyPress}
             />
             <button type="button" className={headStyles.searchButton} onClick={handleSearch}>Поиск</button>
         </div>
