@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 
 import RegPostStyles from '../../styles/RegWindow/RegStyles.module.css';
 
@@ -122,7 +123,7 @@ const Reg = () => {
 
                         <button
                             className={RegPostStyles.RegButton} disabled={loading}>
-                                {loading ? <span className={RegPostStyles.spinner}></span> : 'Зарегистрироваться'}
+                                {loading ? <span className={blockStyle.spinner}></span> : 'Зарегистрироваться'}
                         </button>
 
                         <Link to="/login" className={RegPostStyles.RegLink}>Авторизоваться</Link>

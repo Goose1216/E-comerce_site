@@ -43,9 +43,11 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="Заказ", related_name="order_items")
     count = models.PositiveIntegerField(verbose_name="Количество товара", default=1)
     total_price = models.PositiveIntegerField(verbose_name="Конечная стоимость товаров", blank=True)
+    price = models.PositiveIntegerField(verbose_name="Cтоимость товара", blank=True)
 
     def save(self, *args, **kwargs):
-        self.total_price = self.product.price * self.count
+        self.price = self.product.price
+        self.total_price = self.price * self.count
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

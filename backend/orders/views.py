@@ -1,12 +1,10 @@
 import json
 
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.decorators import permission_classes, api_view
 from drf_spectacular.utils import extend_schema
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth.models import AnonymousUser
-from .serializers import OrderSerializer
+from .serializers import OrderListSerializer, OrderDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 from .models import Order, OrderItem
 import datetime
@@ -31,7 +29,7 @@ def create_order(request):
             if product is None:
                 order.delete()
                 return Response({'message': 'Товар отсутствует'}, status=400)
-            order_item = OrderItem(product=product, order=order)
+            order_item = OrderItem(product=product, order=order, count=item['count'])
             order_item.save()
         order.save()
 
@@ -50,7 +48,20 @@ def create_order(request):
 class OrderList(ListAPIView):
     permission_classes = (IsAuthenticated,)
     pagination_class = None
-    serializer_class = OrderSerializer
+    serializer_class = OrderListSerializer
 
     def get_queryset(self):
-        return Order.objects.filter(client=self.request.user)
+        queryset = Order.objects.filter(client=self.request.user)
+        query = self.request.query_params.get("sort")
+        queryset = queryset.order_by(query)
+        return queryset
+
+
+@extend_schema(summary="Конечная точка показа деталей заказа")
+class OrderDetail(RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    pagination_class = None
+    serializer_class = OrderDetailSerializer
+    queryset = Order.objects.all()
+    lookup_field = 'uuid'
+

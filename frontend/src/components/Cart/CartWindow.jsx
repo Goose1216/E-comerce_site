@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cartStyles from '../../styles/Cart/Cart.module.css';
+import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 import DeleteFromCart from './DeleteFromCart';
 import UpdateCart from './UpdateCart';
 import AddToCart from './AddToCart';
@@ -10,6 +11,7 @@ import { useCart } from '../../CartContext';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
+    const [loading, setLoading] = useState(false);
     const { setCartQuantity } = useCart();
 
     useEffect(() => {
@@ -123,7 +125,14 @@ const Cart = () => {
             )}
             <div className={cartStyles.CartSummary}>
                 <h2>Общая сумма: {cartItems.reduce((acc, item) => acc + item.count * item.price, 0).toLocaleString('ru-RU')} ₽</h2>
-                <button onClick={() => OrderCreate(setCartItems, setCartQuantity)}>Оформить заказ</button>
+                {loading ? <span className={blockStyle.spinner}></span> :
+                   <button
+                        onClick={() => OrderCreate(setCartItems, setCartQuantity, setLoading)}
+                        disabled={cartItems.length === 0 || loading}
+                        className={cartItems.length === 0 || loading ? cartStyles.disabledButton : cartStyles.confirmButton}>
+                        Оформить заказ
+                    </button>
+                }
             </div>
         </div>
     );

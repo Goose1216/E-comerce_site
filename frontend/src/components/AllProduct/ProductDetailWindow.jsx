@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../../styles/AllProductStyles/ProductDetailStyle.module.css'; // Импортируем стили
+import styles from '../../styles/AllProductStyles/ProductDetailStyle.module.css';
 import AddToCartButton from '../../AddToCartButton';
 import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 import CartImg from '../../img/orange-cart.png';

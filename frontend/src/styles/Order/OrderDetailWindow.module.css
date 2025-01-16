@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.orderDetailContainer {
+    padding: 20px;
+    border-radius: 8px;
+    background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+}
+
+.orderTitle {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center; /* Центрируем заголовок */
+}
+
+.orderInfo {
+    display: flex;
+    justify-content: center-between;
+    padding-right:200px;
+    padding-left:400px;
+}
+
+.orderDetails, .orderItems {
+    width: 50%; /* Ширина каждого столбца */
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.orderItemList {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding-left: 0; /* Убираем отступ слева */
+}
+
+.orderItem {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.itemDetails {
+    display: flex;
+    justify-content: space-between; /* Разделяем элементы по краям */
+}
+
+.itemName {
+    font-weight: bold; /* Выделяем название товара */
+}

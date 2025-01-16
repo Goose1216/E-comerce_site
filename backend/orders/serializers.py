@@ -14,10 +14,21 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = ('product', 'count')
+        fields = ('product', 'count', 'total_price', 'price')
 
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderListSerializer(serializers.ModelSerializer):
+    status = serializers.SerializerMethodField(source="get_status")
+
+    class Meta:
+        fields = ("uuid", 'status', 'total_price', 'created_at')
+        model = Order
+
+    def get_status(self, obj):
+        return dict(statuses).get(obj.status)
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
     order_items = OrderItemSerializer(read_only=True, many=True)
     status = serializers.SerializerMethodField(source="get_status")
 

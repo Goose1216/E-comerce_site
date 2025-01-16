@@ -1,8 +1,9 @@
 import { getToken } from '../../authStorage';
 import axios from 'axios';
 
-const OrderCreate = async (setCartItems, setCartQuantity) => {
+const OrderCreate = async (setCartItems, setCartQuantity, setLoading) => {
     try {
+        setLoading(true);
         axios.defaults.withCredentials = true;
         const token = getToken();
         const response = await axios.post('http://localhost:8000/api/v1/orders/create/',
@@ -25,6 +26,8 @@ const OrderCreate = async (setCartItems, setCartQuantity) => {
         }
     } catch (error) {
         console.error('Ошибка при оформлении заказа:', error);
+    } finally {
+       setLoading(false);
     }
 };
 

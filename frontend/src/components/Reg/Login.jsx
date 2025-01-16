@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import regStyles from '../../styles/RegWindow/LoginStyles.module.css';
+import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 import axios from 'axios';
 import { setToken } from '../../authStorage';
 
@@ -70,7 +71,7 @@ const Login = () => {
                     />
 
                     <button className={regStyles.AuthButton} type="submit" disabled={loading}>
-                        {loading ? <span className={regStyles.spinner}></span> : 'Войти'}
+                        {loading ? <span className={blockStyle.spinner}></span> : 'Войти'}
                     </button>
                 </form>
                 <Link to="/reg" className={regStyles.RegLink}>Еще не зарегистрированы?</Link>

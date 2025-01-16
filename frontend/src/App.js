@@ -8,6 +8,7 @@ import Login from './Login';
 import Reg from './Reg';
 import Cart from './Cart';
 import Order from './Order';
+import OrderDetail from './OrderDetail'
 import CatalogWindow from './Catalog';
 import MainIcon from './img/iconMain.png';
 import appStyles from './styles/appStyles.module.css';
@@ -37,6 +38,7 @@ class App extends Component {
                             <Route path="/catalog" element={<CatalogWindow />} />
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/order" element={<Order />} />
+                            <Route path="/order/:uuid" element={<OrderDetail />} />
                             <Route path="/:slug" element={<ProductDetail />} />
                         </Routes>
                     </div>
