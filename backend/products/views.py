@@ -109,17 +109,12 @@ class AddToCartView(APIView):
             data = request.data
             pk = data['product']
             cart = json.loads(request.COOKIES.get('cart', '[]'))
-            iter_cart = iter(cart)
             is_append = True
-            while True:
-                try:
-                    item = next(iter_cart)
-                    if item['product'] == pk:
-                        item['count'] += 1
-                        response = Response({'message': 'Товар Обновлён'}, status=204)
-                        is_append = False
-                        break
-                except StopIteration:
+            for item in cart:
+                if item['product'] == pk:
+                    item['count'] += 1
+                    response = Response({'message': 'Товар Обновлён'}, status=204)
+                    is_append = False
                     break
             if is_append:
                 cart.append(data)
