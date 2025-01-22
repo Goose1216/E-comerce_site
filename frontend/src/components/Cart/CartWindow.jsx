@@ -19,7 +19,7 @@ const Cart = () => {
     }, []);
 
     const fetchCart = async () => {
-        const response = await axios.get('http://localhost:8000/api/v1/products/cart/get/', {
+        const response = await axios.get('http://localhost:8000/api/v1/carts/get/', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

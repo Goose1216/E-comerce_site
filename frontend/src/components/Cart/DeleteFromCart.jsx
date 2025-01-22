@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DeleteFromCart = async (productId, setCartQuantity) => {
     try {
-        const response = await axios.delete('http://localhost:8000/api/v1/products/cart/delete/', {
+        const response = await axios.delete('http://localhost:8000/api/v1/carts/delete/', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

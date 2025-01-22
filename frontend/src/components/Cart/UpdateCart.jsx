@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const UpdateCart = async (productId, countItem) => {
     try {
-        const response = await axios.put('http://localhost:8000/api/v1/products/cart/update/',
+        const response = await axios.put('http://localhost:8000/api/v1/carts/update/',
          {
           product: productId,
           new_count: countItem,

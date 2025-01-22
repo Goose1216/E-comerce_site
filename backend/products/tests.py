@@ -125,7 +125,7 @@ class ProductTest(APITestCase):
         response3 = self.client.post(reverse('add_to_cart'), data={'product': 2, 'count': 1}, format='json')
         cart_cookie = json.loads(response3.cookies['cart'].value)
         self.assertEqual(response1.status_code, 200)
-        self.assertEqual(response2.status_code, 200)
+        self.assertEqual(response2.status_code, 204)
         self.assertEqual(response3.status_code, 200)
         self.assertEqual(len(cart_cookie), 2)
         self.assertEqual(cart_cookie[0]['count'], 2)
