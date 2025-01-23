@@ -1,11 +1,14 @@
-
 from rest_framework import generics
 
-from .models import Product
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.validators import ValidationError
+
+from .models import Product, Review
 from .permissions import IsAdminOrReadOnly
-from .serializers import ProductSerializerList, ProductSerializerDetail
+from .serializers import ProductSerializerList, ProductSerializerDetail, ReviewSerializerCreate, ReviewSerializerList
 from drf_spectacular.utils import extend_schema
 from django.db.models import Q, F, Func
+from django.contrib.auth.models import AnonymousUser
 
 
 @extend_schema(summary="Отображает список всех товаров")
@@ -79,6 +82,18 @@ class ProductDetail(generics.RetrieveAPIView):
     serializer_class = ProductSerializerDetail
     lookup_field = 'slug'
 
+    def get_serializer_context(self):
+        slug = self.kwargs.get('slug')
+        context = super().get_serializer_context()
+        is_user_authorized = False
+        is_reviewed = False
+        if not isinstance(self.request.user, AnonymousUser):
+            is_user_authorized = True
+            is_reviewed = Review.objects.filter(author=self.request.user, product__slug=slug).exists()
+        context['is_user_authorized'] = is_user_authorized
+        context['is_reviewed'] = is_reviewed
+        return context
+
 
 @extend_schema(summary="Отображает список товаров с категорией 'новинка' или с скидкой")
 class ProductMain(generics.ListAPIView):
@@ -87,8 +102,31 @@ class ProductMain(generics.ListAPIView):
     permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self):
-        queryset_new = Product.objects.filter(Q(category__name="Новинка")).order_by('price')[:24]
-        queryset_discount = Product.objects.filter(Q(discount__gt=0)).order_by('-discount')[:21]
+        queryset_new = Product.objects.filter(category__name="Новинка").order_by('price')[:24]
+        queryset_discount = Product.objects.filter(discount__gt=0).order_by('-discount')[:21]
         queryset = (queryset_new | queryset_discount).order_by('-discount')
         return queryset
 
+
+class ReviewCreate(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    model = Review
+    serializer_class = ReviewSerializerCreate
+
+    def perform_create(self, serializer):
+        queryset = Review.objects.filter(author=self.request.user, product=serializer.validated_data.get('product'))
+        if queryset.exists():
+            raise ValidationError("Пользователь уже оставил свой отзыв")
+        serializer.save(author=self.request.user)
+
+
+class ReviewList(generics.ListAPIView):
+    permission_classes = (IsAdminOrReadOnly, )
+    serializer_class = ReviewSerializerList
+    pagination_class = None
+
+    def get_queryset(self):
+        slug = self.request.query_params.get("slug")
+        product = Product.objects.get(slug=slug)
+        queryset = Review.objects.filter(product=product)
+        return queryset

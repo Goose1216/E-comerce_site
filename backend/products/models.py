@@ -76,7 +76,7 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', verbose_name='Товар')
     review = models.TextField(blank=True, null=True, verbose_name='Отзыв')
     date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, verbose_name='Автор')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=False, on_delete=models.SET_NULL, verbose_name='Автор')
     rate = models.CharField(max_length=50, choices=Rate, default="5", verbose_name='Рейтинг')
 
     class Meta:
