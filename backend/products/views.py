@@ -50,10 +50,14 @@ class ProductList(generics.ListAPIView):
     @staticmethod
     def search_products(queryset, query):
         # Несмотря на icontains запрос регистрочувствительный
-        return queryset.filter(
-            Q(name__icontains=query) |
-            Q(brand__name__icontains=query)
-        )
+        query_list = query.split(' ')
+        for query in query_list:
+            queryset = queryset.filter(
+                Q(name__icontains=query) |
+                Q(brand__name__icontains=query) |
+                Q(category__name__icontains=query)
+            ).distinct()
+        return queryset
 
     @staticmethod
     def filter_by_brand(queryset, brand):

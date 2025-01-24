@@ -79,7 +79,7 @@ const Header = () => {
 
       if (response.status === 200) {
         removeToken();
-        window.location.reload();
+        window.location.href = '/';
       } else {
         setError('Не удалось выйти с аккаунта.');
       }
@@ -97,13 +97,13 @@ const Header = () => {
     e.preventDefault();
     if (query) {
       navigate(`/catalog?q=${encodeURIComponent(query)}`);
-      setQuery(''); // Очистка поля поиска после перенаправления
+      setQuery('');
     }
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSearch(e); // Вызываем функцию поиска при нажатии Enter
+      handleSearch(e);
     }
   };
 
@@ -124,7 +124,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = debounce(() => {
       const distanceY = window.scrollY;
-      const scrollThreshold = 150;
+      const scrollThreshold = 100;
 
       if (navbarRef.current && searchBoxRef.current && headHalfRef.current && menuRef.current) {
         if (distanceY > scrollThreshold) {

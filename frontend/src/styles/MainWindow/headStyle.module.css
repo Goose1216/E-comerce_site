@@ -232,26 +232,26 @@ img {
     justify-content: space-between;
     transition: all 0.3s ease;
   }
-  
+
   .stickyHeader .logo p {
     font-size: 30px;
   }
-  
+
   .stickyHeader .other {
     display: none;
   }
-  
+
   .stickyHeader .searchBox {
     position: absolute;
-    left: 30%;
+    left: 43%;
     top: -11px;
   }
-  
+
   .stickyHeader .searchInput {
     width: 350px;
     height: 30px;
   }
-  
+
   .stickyHeader .searchButton {
     height: 30px;
     width: 30px;
@@ -262,21 +262,21 @@ img {
     background-position: center;
     font-size: 0;
   }
-  
+
   .stickyHeader .menuItem img {
     width: 17px;
     height: 17px;
   }
-  
+
   .stickyHeader .menuItem {
     font-size: 16px;
   }
-  
+
   .stickyHeader .componRight {
     position: absolute;
-    left: 70%;
+    left: 80%;
   }
-  
+
   .Admin {
     display: flex;
     position: absolute;
@@ -302,7 +302,7 @@ img {
     right: 55px;
     height: 90px;
 }
-  
+
 .AuthItem {
     display: block;
     color: #000000;
@@ -330,3 +330,4 @@ img {
     padding: 2px 6px; /* Отступы */
     font-size: 15px; /* Размер шрифта */
 }
+

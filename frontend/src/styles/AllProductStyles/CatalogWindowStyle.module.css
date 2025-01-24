@@ -37,7 +37,8 @@
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     cursor: default;
-    width: 260px;
+    width: 280px;
+    font-size:16px;
 }
 
 .Choice p {
@@ -60,7 +61,7 @@
     z-index: 999;
     list-style-type: none;
     flex-wrap: wrap;
-    width: 180px;
+    width: 190px;
 }
 
 .sortWindow label {
@@ -474,7 +475,7 @@ input[type="range"]:active::-webkit-slider-thumb{
     text-align: center; /* Центрирование текста */
     text-decoration: none; /* Без подчеркивания */
     display: inline-block; /* Чтобы кнопка была блочным элементом */
-    font-size: 16px; /* Размер шрифта */
+    font-size: 23px; /* Размер шрифта */
     margin-top: 10px; /* Отступ сверху */
     cursor: pointer; /* Указатель при наведении */
     border-radius: 5px; /* Закругленные углы */
