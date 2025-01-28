@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
     'drf_spectacular',
+    'django_opensearch_dsl',
 
     #Local
     'products.apps.ProductsConfig',
@@ -200,4 +201,11 @@ SPECTACULAR_SETTINGS = {
         "filter": True,
     },
     "COMPONENT_SPLIT_REQUEST": True
+}
+
+# Opensearch
+OPENSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
 }

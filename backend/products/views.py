@@ -1,14 +1,15 @@
 from rest_framework import generics
-
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.validators import ValidationError
 
 from .models import Product, Review
+from .documents import ProductDocument
 from .permissions import IsAdminOrReadOnly
 from .serializers import ProductSerializerList, ProductSerializerDetail, ReviewSerializerCreate, ReviewSerializerList
 from drf_spectacular.utils import extend_schema
-from django.db.models import Q, F, Func
+from django.db.models import F, Func
 from django.contrib.auth.models import AnonymousUser
+from opensearchpy import Q
 
 
 @extend_schema(summary="Отображает список всех товаров")
@@ -21,7 +22,7 @@ class ProductList(generics.ListAPIView):
 
         query = self.request.query_params.get("q")
         if query:
-            queryset = self.search_products(queryset, query)
+            queryset = self.search_products(query)
 
         brand = self.request.query_params.get("brand")
         if brand:
@@ -48,8 +49,10 @@ class ProductList(generics.ListAPIView):
         return queryset
 
     @staticmethod
-    def search_products(queryset, query):
+    def search_products(query):
+
         # Несмотря на icontains запрос регистрочувствительный
+        """"
         query_list = query.split(' ')
         for query in query_list:
             queryset = queryset.filter(
@@ -58,6 +61,14 @@ class ProductList(generics.ListAPIView):
                 Q(category__name__icontains=query)
             ).distinct()
         return queryset
+        """
+        s = ProductDocument.search()
+        query_list = query.split(' ')
+        for term in query_list:
+            s = s.query('bool', should=[
+                Q("fuzzy", name=term), Q("fuzzy", category__name=term), Q("fuzzy", brand__name=term)
+            ])
+        return s.to_queryset()
 
     @staticmethod
     def filter_by_brand(queryset, brand):
