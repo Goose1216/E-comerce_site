@@ -39,3 +39,8 @@ class ProductDocument(Document):
             'name': fields.TextField(analyzer=russian_analyzer)
         }
         related_models = [Category, Brand]
+
+    def get_instances_from_related(self, related_instance):
+        """Обновление индекса при изменении связанных моделей."""
+        if isinstance(related_instance, Category):
+            return related_instance.products.all()

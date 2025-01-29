@@ -2,10 +2,10 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.validators import ValidationError
 
-from .models import Product, Review
+from .models import Product, Review, Category
 from .documents import ProductDocument
 from .permissions import IsAdminOrReadOnly
-from .serializers import ProductSerializerList, ProductSerializerDetail, ReviewSerializerCreate, ReviewSerializerList
+from .serializers import ProductSerializerList, ProductSerializerDetail, ReviewSerializerCreate, ReviewSerializerList, CategorySerializer
 from drf_spectacular.utils import extend_schema
 from django.db.models import F, Func
 from django.contrib.auth.models import AnonymousUser
@@ -51,22 +51,12 @@ class ProductList(generics.ListAPIView):
     @staticmethod
     def search_products(query):
 
-        # Несмотря на icontains запрос регистрочувствительный
-        """"
-        query_list = query.split(' ')
-        for query in query_list:
-            queryset = queryset.filter(
-                Q(name__icontains=query) |
-                Q(brand__name__icontains=query) |
-                Q(category__name__icontains=query)
-            ).distinct()
-        return queryset
-        """
         s = ProductDocument.search()
         query_list = query.split(' ')
         for term in query_list:
+            print(term)
             s = s.query('bool', should=[
-                Q("fuzzy", name=term), Q("fuzzy", category__name=term), Q("fuzzy", brand__name=term)
+                Q("fuzzy", name=term.lower()), Q("fuzzy", category__name=term.lower()), Q("fuzzy", brand__name=term.lower())
             ])
         return s.to_queryset()
 
@@ -145,3 +135,10 @@ class ReviewList(generics.ListAPIView):
         product = Product.objects.get(slug=slug)
         queryset = Review.objects.filter(product=product)
         return queryset
+
+
+class CategoryList(generics.ListAPIView):
+    permission_classes = (IsAdminOrReadOnly, )
+    serializer_class = CategorySerializer
+    pagination_class = None
+    queryset = Category.objects.all()

@@ -331,3 +331,51 @@ img {
     font-size: 15px; /* Размер шрифта */
 }
 
+/* Стили для списка подсказок */
+.itemList {
+  list-style-type: none;
+  border: 1px solid #ccc;
+  max-height: 300px; /* Максимальная высота выпадающего списка */
+  background-color: white;
+  position: absolute;
+  width: calc(100% - 2px); /* Ширина равна ширине поля ввода */
+  z-index: 1000; /* Убедитесь, что список находится выше других элементов */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для улучшения визуального восприятия */
+  scrollbar-width: none;
+}
+
+/* Стили для отдельных элементов подсказки */
+.itemList li {
+  cursor: pointer;
+  margin: 0;
+  padding: 10px;
+}
+
+/* Стили для активного элемента подсказки */
+.activeItem {
+  background-color: #f0f0f0; /* Цвет фона для выбранного элемента */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+
+/* Стили для элементов подсказки при наведении */
+.itemList li:hover {
+  background-color: #e0e0e0;
+}
+
+/* Стили для сообщения "Nothing to show" */
+.itemListNot {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  background-color: white;
+  position: absolute;
+  width: calc(100% - 2px);
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.itemListNot li {
+  color: #999; /* Цвет текста для сообщения "Nothing to show" */
+}
+

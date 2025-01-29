@@ -86,6 +86,8 @@ const CatalogWindow = () => {
           brand: params.get('brand') ? params.get('brand').split('-') : [],
         };
     };
+    const {q} = getQueryParams();
+
 
     const getSortingKey1 = (value) => Object.keys(sortingOptions1).find(key => sortingOptions1[key] === value);
     const getSortingKey2 = (value) => Object.keys(sortingOptions2).find(key => sortingOptions2[key] === value);
@@ -101,7 +103,7 @@ const CatalogWindow = () => {
         params.set('sort', getSortingKey1(sortingOption1));
         const priceRange = `${minPrice}-${maxPrice}`;
         params.set('price', priceRange);
-        const { q, brand} = getQueryParams();
+        const {brand} = getQueryParams();
         if (q) {
           params.set('q', q);
         }
@@ -269,6 +271,11 @@ const CatalogWindow = () => {
                     <button onClick={handleConfirmPrices} className={catalogStyle.confirmButton}>Подтвердить</button>
                 </div>
                 <div className={catalogStyle.catalogContainer}>
+                 {q && (
+                      <div className={catalogStyle.MessageAboutQuery}>
+                        <span>По вашему запросу "{q}" найдено:</span>
+                      </div>
+                    )}
                     <div className={catalogStyle.UpFilterContainer}>
                         <span className={catalogStyle.Choice}>
                             Сортировка:
@@ -317,6 +324,7 @@ const CatalogWindow = () => {
                                 )}
                             </span>
                         </span>
+
                         <span className={catalogStyle.Choice}>
                             Группировка:
                             <span className={catalogStyle.ButtonChoice} ref={sortWindowRef2} onClick={handleMouseEnter2}>

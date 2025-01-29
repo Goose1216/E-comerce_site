@@ -526,3 +526,17 @@ input[type="range"]:active::-webkit-slider-thumb{
   right: 0;
   bottom: 60px;
 }
+
+
+.MessageAboutQuery {
+  margin-bottom: 20px; /* Отступ снизу для сообщения */
+  display: flex;
+  align-items: center; /* Выравнивание вертикально по центру */
+}
+
+.MessageAboutQuery span {
+  font-size: 30px; /* Размер шрифта */
+  color: #333; /* Цвет текста */
+  font-weight: lighter; /* Жирный шрифт */
+  margin-left: 30px; /* Отступ слева от линии */
+}
