@@ -5,6 +5,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+         text-decoration: none;
+
 }
 
 .Body {
@@ -269,15 +271,20 @@ input[type="range"]:active::-webkit-slider-thumb{
 .ProductName {
     display: flex;
     font-size: 18px;
-    margin: 0 10px;
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 100px;
     flex-wrap: wrap;
     white-space: normal;
     cursor: pointer;
+    color: #000000;
 }
+
+
 
 .ProductPrice {
     position: absolute;
-    bottom: 10px;
+    top: 10px; /* Перемещаем цену в верхний правый угол */
     right: 10px;
     font-size: 22px;
     color: #ff6600;
@@ -285,12 +292,13 @@ input[type="range"]:active::-webkit-slider-thumb{
 
 .OldProductPrice {
     position: absolute;
-    bottom: 35px;
-    text-decoration: line-through;
+    top: 35px; /* Перемещаем старую цену под новую цену */
     right: 10px;
+    text-decoration: line-through;
     font-size: 17px;
     color: #5e5e5e;
 }
+
 
 .SalePicture {
     position: absolute;
@@ -333,6 +341,7 @@ input[type="range"]:active::-webkit-slider-thumb{
     cursor: pointer;
     transition: 0.2s;
 }
+
 
 .controls {
     display: flex;
@@ -469,25 +478,25 @@ input[type="range"]:active::-webkit-slider-thumb{
     height: 5%;
     left: 3.3%;
     position: absolute;
-    background-color: #4CAF50; /* Зеленый цвет фона */
-    border: none; /* Без границы */
-    color: white; /* Белый цвет текста */
-    text-align: center; /* Центрирование текста */
-    text-decoration: none; /* Без подчеркивания */
-    display: inline-block; /* Чтобы кнопка была блочным элементом */
-    font-size: 23px; /* Размер шрифта */
-    margin-top: 10px; /* Отступ сверху */
-    cursor: pointer; /* Указатель при наведении */
-    border-radius: 5px; /* Закругленные углы */
-    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .confirmButton:hover {
-    background-color: #45a049; /* Цвет фона при наведении */
+    background-color: #45a049;
 }
 
 .confirmButton:active {
-    background-color: #3e8e41; /* Цвет фона при нажатии */
+    background-color: #3e8e41;
 }
 
 .brandContainer {
@@ -506,37 +515,51 @@ input[type="range"]:active::-webkit-slider-thumb{
 }
 
 .brandItem {
-    display: flex; /* Используем flexbox для выравнивания элементов */
-    align-items: center; /* Центрируем элементы по вертикали */
-    margin: 5px 0; /* Отступы между элементами */
-    cursor: pointer; /* Указатель при наведении */
-    transition: background-color 0.2s ease; /* Плавный переход цвета фона */
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .brandItem input[type="checkbox"] {
-    margin-right: 10px; /* Отступ между чекбоксом и текстом */
+    margin-right: 10px;
 }
 
 .brandItem:hover {
-    background-color: #f0f0f0; /* Цвет фона при наведении */
+    background-color: #f0f0f0;
 }
 
 .addToCartButton {
-  position: absolute;
-  right: 0;
-  bottom: 60px;
+    position: absolute;
+    right: -15px;
+    bottom: 10px;
 }
 
-
 .MessageAboutQuery {
-  margin-bottom: 20px; /* Отступ снизу для сообщения */
+  margin-bottom: 20px;
   display: flex;
-  align-items: center; /* Выравнивание вертикально по центру */
+  align-items: center;
 }
 
 .MessageAboutQuery span {
-  font-size: 30px; /* Размер шрифта */
-  color: #333; /* Цвет текста */
-  font-weight: lighter; /* Жирный шрифт */
-  margin-left: 30px; /* Отступ слева от линии */
+  font-size: 30px;
+  color: #333;
+  font-weight: lighter;
+  margin-left: 30px;
+}
+
+.total_rate {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    font-size: 20px;
+    margin-left:10px;
+    bottom:19px;
+}
+
+.star_rating {
+    font-size: 30px;
+    color: #FFB300;
+    margin-left: 10px;
 }

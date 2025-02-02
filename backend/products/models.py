@@ -53,6 +53,7 @@ class Product(models.Model):
     width = models.PositiveSmallIntegerField(blank=True, null=True)
     brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL, verbose_name='Бренд')
     category = models.ManyToManyField(Category, verbose_name='Категория')
+    total_rate = models.FloatField(editable=False, verbose_name="Средний рейтинг", default=0.0)
 
     class Meta:
         ordering = ['name', ]
@@ -69,6 +70,14 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         self.price = math.ceil(self.price_standart * ((100 - self.discount) / 100))
+        reviews = Review.objects.filter(product=self)
+        if reviews:
+            total_rate = reviews.aggregate(models.Avg('rate'))
+        else:
+            total_rate = {'rate__avg': 0}
+        print(Review.objects.filter(product=self))
+        print(total_rate)
+        self.total_rate = total_rate['rate__avg']
         super().save(*args, **kwargs)
 
 

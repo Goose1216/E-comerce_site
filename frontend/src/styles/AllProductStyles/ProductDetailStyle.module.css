@@ -55,8 +55,8 @@
 
 .productPrice {
     margin-top: 20px;
-    font-size: 25px; /* Размер шрифта для цены товара */
-    color: #333; /* Темный цвет текста */
+    font-size: 25px;
+    color: #333;
 }
 
 .discountPrice {
@@ -111,7 +111,7 @@
 }
 
 .reviewCard {
-    margin-bottom: 5px; /* Отступ между заголовком и текстом отзыва */
+    margin-bottom: 5px;
 }
 
 .reviewAuthor {
@@ -121,8 +121,8 @@
 }
 
 .reviewText {
-    word-wrap: break-word; /* Перенос слов, если они слишком длинные */
-    white-space: pre-wrap; /* Сохраняет пробелы и переносы строк */
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .reviewRating {

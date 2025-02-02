@@ -15,8 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
         ReviewInline,
     ]
     list_filter = ["brand",]
-    list_display = ["name", "price_standart", "discount", "price", "brand", 'slug']
-
+    list_display = ["name", "price_standart", "discount", "price", "brand", 'slug', 'total_rate']
 
     
 admin.site.register(Product, ProductAdmin)

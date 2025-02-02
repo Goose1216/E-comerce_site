@@ -71,7 +71,8 @@ const CatalogWindow = () => {
     const sortingOptions1 = {
         '-price': 'Сначала дорогие',
         'price': 'Сначала недорогие',
-        'name': 'По алфавиту'
+        'name': 'По алфавиту',
+        '-total_rate': 'По рейтингу',
     };
 
     const sortingOptions2 = {
@@ -320,6 +321,18 @@ const CatalogWindow = () => {
                                             <span className={catalogStyle.radio_custom}></span>
                                             <span className={catalogStyle.radio_label}>По алфавиту</span>
                                         </label>
+                                        <br />
+                                        <label className={catalogStyle.radio_container}>
+                                            <input
+                                                type="radio"
+                                                value="-total_rate"
+                                                checked={sortingOption1 === 'По рейтингу'}
+                                                onChange={handleSortingChange1}
+                                                className={catalogStyle.radio_input}
+                                            />
+                                            <span className={catalogStyle.radio_custom}></span>
+                                            <span className={catalogStyle.radio_label}>По рейтингу</span>
+                                        </label>
                                     </li>
                                 )}
                             </span>
@@ -369,10 +382,21 @@ const CatalogWindow = () => {
                                   <img src={item.image} alt="Изображение товара" />
                                 </Link>
                                 </div>
-                                <h1 className={catalogStyle.ProductName}>{item.name}</h1>
+                                <div className={catalogStyle.textAndRate}>
+                                    <Link to={`/${item.slug}`}>
+                                        <h1 className={catalogStyle.ProductName}>{item.name}</h1>
+                                    </Link>
+                                     <div className = {catalogStyle.total_rate}>
+                                         {item.total_rate}
+                                         <div className = {catalogStyle.star_rating}>
+                                            <span className={'fa fa-star'}></span>
+                                         </div>
+                                    </div>
+                                </div>
                                 <span className={item.discount > 0 ? catalogStyle.OldProductPrice : catalogStyle.ProductPrice}>
                                     {item.price_standart.toLocaleString('ru-RU')} ₽
                                 </span>
+
                                 <div className = {catalogStyle.addToCartButton}>
                                  <AddToCartButton
                                    imageSrc={CartImg}
