@@ -75,8 +75,6 @@ class Product(models.Model):
             total_rate = reviews.aggregate(models.Avg('rate'))
         else:
             total_rate = {'rate__avg': 0}
-        print(Review.objects.filter(product=self))
-        print(total_rate)
         self.total_rate = total_rate['rate__avg']
         super().save(*args, **kwargs)
 
@@ -99,3 +97,7 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return Product.objects.get(pk=self.product.pk).get_absolute_url()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        print(self.product.save(update_fields=["total_rate"]))
