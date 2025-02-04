@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models import Sum
 import uuid
+from django.core.validators import RegexValidator
 
 from products.models import Product
 
@@ -20,6 +21,15 @@ class Order(models.Model):
     status = models.CharField(choices=statuses, verbose_name="Статус заказа", default="1", max_length=50)
     total_price = models.PositiveIntegerField(verbose_name="Сумма заказа", default=0)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания", editable=False)
+    email = models.EmailField(verbose_name='Почта')
+    phone = models.CharField(max_length=12,  validators=[
+            RegexValidator(
+                regex=r'^(?:\+7|8)\d{10}$',
+                message="Телефонный номер должен быть представлен в виде +79999999999 (11 цифр)"
+            )
+        ])
+    address = models.CharField(max_length=100, verbose_name='Адрес заказчика')
+    name_client = models.CharField(max_length=100, verbose_name='ФИО заказчика')
 
     def save(self, *args, **kwargs):
         total = OrderItem.objects.filter(order=self).aggregate(Sum('total_price'))['total_price__sum']

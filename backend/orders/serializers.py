@@ -33,7 +33,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
     status = serializers.SerializerMethodField(source="get_status")
 
     class Meta:
-        fields = ("uuid", 'status', 'total_price', 'created_at', 'order_items')
+        fields = "__all__"
         model = Order
 
     def get_status(self, obj):

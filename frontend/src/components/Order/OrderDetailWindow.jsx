@@ -44,6 +44,10 @@ const OrderDetailWindow = ({ uuid, token }) => {
                     <p><strong>Дата заказа:</strong> {new Date(order.created_at).toLocaleDateString('ru-RU')}</p>
                     <p><strong>Статус:</strong> {order.status}</p>
                     <p><strong>Сумма заказа:</strong> {order.total_price ? order.total_price.toLocaleString('ru-RU') : 'Не указана'} ₽</p>
+                    <p><strong>Адрес</strong>: {order.address}</p>
+                    <p><strong>Телефон</strong>: {order.phone}</p>
+                    <p><strong>Почта</strong>: {order.email}</p>
+                    <p><strong>ФИО</strong>: {order.name_client}</p>
                 </div>
                 <div className={orderStyles.orderItems}>
                     <h2>Товары в заказе:</h2>
@@ -55,6 +59,7 @@ const OrderDetailWindow = ({ uuid, token }) => {
                                     <span>Количество: {item.count}</span>
                                     <span>Цена за единицу: {item.price.toLocaleString('ru-RU')} ₽</span>
                                     <span>Итоговая цена: {item.total_price.toLocaleString('ru-RU')} ₽</span>
+
                                 </div>
                             </li>
                         ))}

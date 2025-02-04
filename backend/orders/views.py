@@ -1,6 +1,6 @@
 import json
 
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework.decorators import permission_classes, api_view
 from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
@@ -16,12 +16,17 @@ from products.models import Product
 @permission_classes([IsAuthenticated])
 def create_order(request):
     try:
+        data = json.loads(request.body)
+        phone = data['phone']
+        email = data['email']
+        name_client = data['name_client']
+        address = data['address']
         cart = request.COOKIES.get('cart')
         if cart is None:
             return Response({'message': 'Корзина пуста'}, status=400)
 
         cart_items = json.loads(cart)
-        order = Order(client=request.user)
+        order = Order(client=request.user, phone=phone, email=email, name_client=name_client, address=address)
         order.save()
 
         for item in cart_items:

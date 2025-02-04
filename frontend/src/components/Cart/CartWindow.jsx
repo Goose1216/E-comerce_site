@@ -5,14 +5,13 @@ import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 import DeleteFromCart from './DeleteFromCart';
 import UpdateCart from './UpdateCart';
 import AddToCart from './AddToCart';
-import OrderCreate from '../Order/OrderCreate';
 import { useLocation, Link } from 'react-router-dom';
 import { useCart } from '../../CartContext';
+import { getToken } from '../../authStorage';
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const { setCartQuantity } = useCart();
+    const { setCartQuantity, cartItems, setCartItems} = useCart();
+    const token = getToken();
 
     useEffect(() => {
         fetchCart();
@@ -82,7 +81,9 @@ const Cart = () => {
                               <img src={item.image} alt="Изображение товара" />
                             </Link>
                             <div>
-                                <h2>{item.name}</h2>
+                               <Link to={`/${item.slug}`}>
+                                    <h1 className={cartStyles.ProductName}>{item.name}</h1>
+                                </Link>
                                 <p>Цена: {item.price.toLocaleString('ru-RU')} ₽</p>
                                 <p>
                                     Количество:
@@ -90,7 +91,7 @@ const Cart = () => {
                                         <button
                                             className={cartStyles.QuantityButton}
                                             onClick={() => handleUpdateButton(item.pk, item.count - 1)}
-                                            disabled={item.count <= 1} // Отключаем кнопку, если количество меньше или равно 1
+                                            disabled={item.count <= 1}
                                         >
                                             -
                                         </button>
@@ -125,13 +126,22 @@ const Cart = () => {
             )}
             <div className={cartStyles.CartSummary}>
                 <h2>Общая сумма: {cartItems.reduce((acc, item) => acc + item.count * item.price, 0).toLocaleString('ru-RU')} ₽</h2>
-                {loading ? <span className={blockStyle.spinner}></span> :
-                   <button
-                        onClick={() => OrderCreate(setCartItems, setCartQuantity, setLoading)}
-                        disabled={cartItems.length === 0 || loading}
-                        className={cartItems.length === 0 || loading ? cartStyles.disabledButton : cartStyles.confirmButton}>
+                {
+                <Link to={`/order/create`}>
+                {token ? (
+                     <button
+                        className={cartStyles.confirmButton}>
                         Оформить заказ
                     </button>
+                ) : (
+                    <button
+                        disabled = {true}
+                        className={cartStyles.confirmButton}>
+                        Для оформления заказа - авторизуйтесь
+                    </button>
+                )}
+
+                 </Link>
                 }
             </div>
         </div>
