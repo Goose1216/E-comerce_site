@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'allauth',
     'allauth.account',
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.yandex",
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'corsheaders',
@@ -192,6 +195,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 
+
 # Spectacular
 SPECTACULAR_SETTINGS = {
     "TITLE": "Post API",
@@ -209,3 +213,4 @@ OPENSEARCH_DSL = {
         'hosts': 'localhost:9200'
     },
 }
+

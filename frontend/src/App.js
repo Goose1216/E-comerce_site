@@ -5,6 +5,8 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import ProductDetail from './ProductDetail';
 import Login from './Login';
+import LoginGoogle from './LoginGoogle';
+import LoginYandex from './LoginYandex';
 import Reg from './Reg';
 import Cart from './Cart';
 import Order from './Order';
@@ -35,6 +37,8 @@ class App extends Component {
                         <Routes>
                             <Route path="/" element={<Layout />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="/login/google" element={<LoginGoogle />} />
+                            <Route path="/login/yandex" element={<LoginYandex />} />
                             <Route path="/reg" element={<Reg />} />
                             <Route path="/catalog" element={<CatalogWindow />} />
                             <Route path="/cart" element={<Cart />} />
