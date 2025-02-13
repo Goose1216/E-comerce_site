@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import orderStyles from '../../styles/Order/Order.module.css';
 import { useLocation, Link } from 'react-router-dom';
+import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 
 const OrderList = ({ token }) => {
     const [orders, setOrders] = useState([]);
     const [sortingOption, setSortingOption] = useState('Сначала новые');
     const [sortChoice, setSortChoice] = useState(false);
     const location = useLocation();
+    const [loading, setLoading] = useState(true);
 
     const sortWindowRef = useRef(null);
 
@@ -61,8 +63,13 @@ const OrderList = ({ token }) => {
             setOrders(response.data);
         } catch (error) {
             console.error('Ошибка при получении заказов:', error);
+        }finally {
+            setLoading(false);
         }
     };
+    if (loading) {
+        return  <div className={orderStyles.OrderContainer}> <span className={blockStyle.spinner}></span></div>;
+    }
 
     return (
         <div className={orderStyles.OrderContainer}>

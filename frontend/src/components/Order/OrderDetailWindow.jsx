@@ -1,6 +1,7 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
 import orderStyles from '../../styles/Order/OrderDetailWindow.module.css';
+import blockStyle from '../../styles/MainWindow/BlockStyle.module.css';
 
 const OrderDetailWindow = ({ uuid, token }) => {
     const [order, setOrders] = useState(null);
@@ -28,7 +29,7 @@ const OrderDetailWindow = ({ uuid, token }) => {
     }, [uuid]);
 
     if (loading) {
-        return <div className={orderStyles.textLoadingOrError}>Загрузка...</div>;
+        return <span className={blockStyle.spinner}></span>;
     }
 
     if (!order) {
