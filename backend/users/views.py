@@ -15,3 +15,5 @@ class YandexLoginView(SocialLoginView):
     adapter_class = YandexAuth2Adapter
     callback_url = 'http://localhost:3000/login/yandex'
     client_class = OAuth2Client
+
+

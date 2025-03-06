@@ -1,0 +1,110 @@
+.Container {
+    display: flex;
+    background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+}
+
+.errorMessage {
+    background: linear-gradient(#72c79f, #d3f7e5, #ffffff);
+    padding: 30px 20px;
+    align-items: center;
+}
+
+.profileContainer {
+  width: 900px;
+  height: 600px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profileImage {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.username {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.registrationDate {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profileForm label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #555;
+}
+
+.profileForm input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.profileActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.leftButtons {
+  display: flex;
+  gap: 20px;
+}
+
+.saveButton,
+.changePasswordButton,
+.logoutButton,
+.deleteButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: black;
+}
+
+.deleteButton {
+  background-color: #ffffff;
+  color: #ff5722;
+}
+
+.saveButton {
+ background-color: #1a7e51;
+ color: white;
+}
+
+.saveButton:hover,
+.changePasswordButton:hover,
+.logoutButton:hover,
+.deleteButton:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+}

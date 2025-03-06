@@ -65,3 +65,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'Товар {str(self.product)} {self.count} шт.'
+
+    class Meta:
+        verbose_name = "Товар заказа"
+        verbose_name_plural = "Товары заказа"

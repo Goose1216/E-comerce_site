@@ -254,6 +254,9 @@ const Header = () => {
           </nav>
           {isMenuOpen && (
             <div className={headStyles.Admin}>
+              <Link to="/profile" className={headStyles.AuthExit}>
+                    Личный кабинет
+              </Link>
               <button className={headStyles.AuthExit} onClick={handleLogout}>
                     Выйти
               </button>
