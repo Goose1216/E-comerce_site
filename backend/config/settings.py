@@ -164,10 +164,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'users.serializers.CustomUserDetailsSerializer',
     'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+    'OLD_PASSWORD_FIELD_ENABLED': True,
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
 }
 
 ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
 AUTH_USER_MODEL = 'users.CustomUser'
+
+
 
 # DRF
 REST_FRAMEWORK = {
@@ -182,7 +186,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'products.pagination.CustomPagination',
     'PAGE_SIZE': 8
 }
-OLD_PASSWORD_FIELD_ENABLED = True
 
 # CORS
 CORS_ALLOW_CREDENTIALS = True

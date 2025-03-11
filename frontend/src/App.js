@@ -8,6 +8,7 @@ import Login from './Login';
 import LoginGoogle from './LoginGoogle';
 import LoginYandex from './LoginYandex';
 import ProfileWindow from './Profile';
+import PasswordChange from './PasswordChange';
 import Reg from './Reg';
 import Cart from './Cart';
 import Order from './Order';
@@ -42,6 +43,7 @@ class App extends Component {
                             <Route path="/login/yandex" element={<LoginYandex />} />
                             <Route path="/reg" element={<Reg />} />
                             <Route path="/profile" element={<ProfileWindow />} />
+                            <Route path="/change-password" element={<PasswordChange />} />
                             <Route path="/catalog" element={<CatalogWindow />} />
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/order" element={<Order />} />

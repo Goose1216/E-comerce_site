@@ -73,16 +73,31 @@ const UserProfileWindow = () => {
     if (error.response && error.response.data) {
       let errorMessage = 'Произошла ошибка при обновлении данных.';
       if (error.response.data.username) {
-        errorMessage = `Пользователь с таким именем уже существует.`;
+        errorMessage = error.response.data.username;
+      }
+      if (error.response.data.phone_number) {
+        errorMessage = error.response.data.phone_number;
+      }
+      if (error.response.data.first_name) {
+        errorMessage = error.response.data.first_name;
+      }
+      if (error.response.data.last_name) {
+        errorMessage = error.response.data.last_name;
+      }
+       if (error.response.data.email) {
+        errorMessage = error.response.data.email;
       }
       alert(errorMessage);
     } else {
       alert('Возникла непредвиденная ошибка при попытке обновления');
     }
     console.error('Ошибка при обновлении данных:', error);
+  } finally {
+      fetchProfile();
+      setNewData({});
   }
 };
-
+  // Удаление профиля пока не работает, оно просто выходит из аккаунта
   const handleDeleteProfile = async () => {
     if (window.confirm('Вы уверены, что хотите удалить профиль?')) {
       try {
@@ -92,8 +107,8 @@ const UserProfileWindow = () => {
           },
         });
         alert('Профиль успешно удален.');
-        localStorage.removeItem('token'); // Удаляем токен
-        window.location.href = '/'; // Перенаправляем на главную страницу
+        localStorage.removeItem('token');
+        window.location.href = '/';
       } catch (error) {
          alert('Возникла непредвиденная ошибка при попытке удаления');
         console.error('Ошибка при удалении профиля:', error);
@@ -143,7 +158,6 @@ const UserProfileWindow = () => {
             name="phone_number"
             value={formData.phone_number}
             onChange={handleInputChange}
-            readOnly
           />
         </label>
         <label>

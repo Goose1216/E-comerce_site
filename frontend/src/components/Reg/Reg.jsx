@@ -26,12 +26,12 @@ const Reg = () => {
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
-        setEmailError(''); // Сбрасываем ошибку при изменении email
+        setEmailError('');
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-        setPasswordError(''); // Сбрасываем ошибку при изменении пароля
+        setPasswordError('');
     };
 
     const handleConfirmPasswordChange = (event) => {
@@ -68,11 +68,17 @@ const Reg = () => {
                 if (responseData.password2) {
                     setConfirmPasswordError(responseData.password2[0]);
                 }
+                if (responseData.non_field_errors) {
+                    setConfirmPasswordError(responseData.non_field_errors[0]);
+                }
             } else if (error.request) {
                 console.error('Ошибка при отправке запроса:', error.request);
             } else {
                 console.error('Ошибка:', error.message);
             }
+        }
+        finally {
+        setLoading(false);
         }
     };
 
