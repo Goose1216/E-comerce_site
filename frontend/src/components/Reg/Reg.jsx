@@ -15,6 +15,8 @@ const Reg = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
     const [loading, setLoading] = useState(false);
 
@@ -39,22 +41,40 @@ const Reg = () => {
         setConfirmPasswordError('');
     };
 
+    const handlePhoneChange = (event) => {
+        setPhone(event.target.value);
+        setPhoneError('');
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         setLoading(true);
 
         try {
+            if (phone == '') {
+             const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/', {
+                username,
+                email,
+                password1: password,
+                password2: confirmPassword,
+            });
+            console.log('Успешная регистрация:', response.data);
+
+            navigate('/login');
+
+            } else {
             const response = await axios.post('http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/', {
                 username,
                 email,
                 password1: password,
-                password2: confirmPassword
+                password2: confirmPassword,
+                phone_number: phone
             });
-
             console.log('Успешная регистрация:', response.data);
 
             navigate('/login');
+            }
 
         } catch (error) {
             if (error.response && error.response.data) {
@@ -70,6 +90,9 @@ const Reg = () => {
                 }
                 if (responseData.non_field_errors) {
                     setConfirmPasswordError(responseData.non_field_errors[0]);
+                }
+                if (responseData.phone_number) {
+                    setPhoneError(responseData.phone_number[0]);
                 }
             } else if (error.request) {
                 console.error('Ошибка при отправке запроса:', error.request);
@@ -126,6 +149,14 @@ const Reg = () => {
                             required
                         />
                         {confirmPasswordError && <div className={RegPostStyles.errorMessagePassConf}>{confirmPasswordError}</div>}
+
+                        <label htmlFor="phone" className={RegPostStyles.RegLabel}>Телефон</label>
+                        <input
+                            type="text"
+                            value={phone}
+                            onChange={handlePhoneChange}
+                        />
+                        {phoneError && <div className={RegPostStyles.errorMessagePhoneError}>{phoneError}</div>}
 
                         <button
                             className={RegPostStyles.RegButton} disabled={loading}>
